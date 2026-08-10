@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Checkout | SportPro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\components.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    
+    <style>
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0 20px;
+        }
+        .checkout-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .checkout-header p {
+            color: var(--text-gray);
+        }
+        
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        /* فرم */
+        .checkout-form {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .form-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .form-group label .required {
+            color: var(--accent);
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: var(--radius-md);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            transition: var(--transition-normal);
+        }
+        .form-group select option {
+            background: var(--primary-dark);
+            color: var(--text-light);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: var(--radius-md);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            transition: var(--transition-normal);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(100, 255, 218, 0.05);
+        }
+        
+        /* روش ارسال و پرداخت */
+        .payment-method,
+        .shipping-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-md);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            border: 1px solid transparent;
+        }
+        .payment-method:hover,
+        .shipping-method:hover {
+            background: rgba(100, 255, 218, 0.05);
+        }
+        .payment-method.selected,
+        .shipping-method.selected {
+            border-color: var(--secondary);
+            background: rgba(100, 255, 218, 0.05);
+        }
+        .payment-method input,
+        .shipping-method input {
+            margin: 0;
+            accent-color: var(--secondary);
+        }
+        .payment-method label,
+        .shipping-method label {
+            flex: 1;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .payment-method small,
+        .shipping-method small {
+            display: block;
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            font-weight: normal;
+            margin-top: 4px;
+        }
+        
+        /* سایدبار سفارش */
+        .order-sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .order-sidebar h3 {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        .order-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.05);
+        }
+        .order-item-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .order-item-info p {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+        }
+        .order-item-price {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        .order-total {
+            padding-top: 15px;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        .order-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-gray);
+        }
+        .order-total-row.grand-total {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+        .order-total-row.grand-total span:last-child {
+            color: var(--secondary);
+        }
+        .place-order-btn {
+            width: 100%;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            border: none;
+            padding: 15px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            margin-top: 20px;
+        }
+        .place-order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* سوءتفاهم‌نامه */
+        .back-to-cart {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+        .back-to-cart:hover {
+            color: var(--secondary);
+        }
+        
+        @media (max-width: 992px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+            .order-sidebar {
+                position: static;
+                order: 2;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .checkout-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header"><h3>Menu</h3><button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button></div>
+    <nav class="sidebar-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="sidebar-contact"><h4>Contact Us</h4><p><i class="fas fa-phone"></i> 09103203789</p><p><i class="fas fa-envelope"></i> info@sportpro.com</p></div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo"><a href="index.html"><h2>Sport<span>Pro</span></h2></a></div>
+            <nav class="desktop-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button id="openSidebar" class="icon-btn menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="searchModal" class="search-modal"><div class="search-modal-content"><button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button><div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" placeholder="Search products..." id="searchInput"></div><div class="search-results" id="searchResults"></div></div></div>
+
+<main style="margin-top: 100px; min-height: calc(100vh - 500px);">
+    <div class="container">
+        <div class="checkout-header">
+            <h1>Checkout</h1>
+            <p>Complete your purchase by filling out the information below</p>
+        </div>
+        
+        <div class="checkout-layout" id="checkoutContent">
+            <div style="text-align: center; padding: 50px;">Loading checkout...</div>
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\home.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About US</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p><div class="payment-methods"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-amex"></i></div></div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+
+<script>
+    const CART_KEY = 'sportpro_cart';
+    
+    function loadCart() { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+    
+    function updateCartCount() {
+        const cart = loadCart();
+        const total = cart.reduce((s, i) => s + i.quantity, 0);
+        document.querySelectorAll('.cart-count').forEach(el => { if (el) el.textContent = total; });
+    }
+    
+    function showNotification(message, isError = false) {
+        const n = document.createElement('div');
+        n.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
+        n.style.cssText = `position:fixed;bottom:20px;right:20px;background:${isError ? '#EF4444' : '#10B981'};color:white;padding:12px 24px;border-radius:8px;z-index:10000;animation:slideInRight 0.3s ease;`;
+        document.body.appendChild(n);
+        setTimeout(() => n.remove(), 3000);
+    }
+    
+    function renderCheckout() {
+        const cart = loadCart();
+        const container = document.getElementById('checkoutContent');
+        
+        if (cart.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column:1/-1; text-align:center; padding:80px 20px; background:rgba(255,255,255,0.03); border-radius:16px;">
+                    <i class="fas fa-shopping-bag fa-4x" style="color: var(--text-gray); opacity:0.5; margin-bottom:20px;"></i>
+                    <h3>Your cart is empty</h3>
+                    <p>Add some products to your cart before checking out.</p>
+                    <a href="shop.html" class="btn-primary" style="margin-top:20px; display:inline-block;">Continue Shopping</a>
+                </div>
+            `;
+            return;
+        }
+        
+        
+        let subtotal = 0;
+        cart.forEach(item => { subtotal += item.price * item.quantity; });
+        const shipping = subtotal > 100 ? 0 : 15;
+        const tax = subtotal * 0.1;
+        const total = subtotal + shipping + tax;
+        
+        container.innerHTML = `
+            <div class="checkout-form">
+                <form id="checkoutForm">
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-map-marker-alt"></i> Shipping Address</h3>
+                        <div class="form-group">
+                            <label>Street Address <span class="required">*</span></label>
+                            <input type="text" id="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City <span class="required">*</span></label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label>State/Province</label>
+                                <input type="text" id="state">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>ZIP/Postal Code <span class="required">*</span></label>
+                                <input type="text" id="zip" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Country <span class="required">*</span></label>
+                                <select id="country">
+                                    <option value="">Select Country</option>
+                                    <option value="AF">Afghanistan</option>
+                                    <option value="AL">Albania</option>
+                                    <option value="DZ">Algeria</option>
+                                    <option value="AD">Andorra</option>
+                                    <option value="AO">Angola</option>
+                                    <option value="AG">Antigua and Barbuda</option>
+                                    <option value="AR">Argentina</option>
+                                    <option value="AM">Armenia</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="AT">Austria</option>
+                                    <option value="AZ">Azerbaijan</option>
+                                    <option value="BS">Bahamas</option>
+                                    <option value="BH">Bahrain</option>
+                                    <option value="BD">Bangladesh</option>
+                                    <option value="BB">Barbados</option>
+                                    <option value="BY">Belarus</option>
+                                    <option value="BE">Belgium</option>
+                                    <option value="BZ">Belize</option>
+                                    <option value="BJ">Benin</option>
+                                    <option value="BT">Bhutan</option>
+                                    <option value="BO">Bolivia</option>
+                                    <option value="BA">Bosnia and Herzegovina</option>
+                                    <option value="BW">Botswana</option>
+                                    <option value="BR">Brazil</option>
+                                    <option value="BN">Brunei</option>
+                                    <option value="BG">Bulgaria</option>
+                                    <option value="BF">Burkina Faso</option>
+                                    <option value="BI">Burundi</option>
+                                    <option value="CV">Cabo Verde</option>
+                                    <option value="KH">Cambodia</option>
+                                    <option value="CM">Cameroon</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="CF">Central African Republic</option>
+                                    <option value="TD">Chad</option>
+                                    <option value="CL">Chile</option>
+                                    <option value="CN">China</option>
+                                    <option value="CO">Colombia</option>
+                                    <option value="KM">Comoros</option>
+                                    <option value="CG">Congo</option>
+                                    <option value="CR">Costa Rica</option>
+                                    <option value="CI">Côte d'Ivoire</option>
+                                    <option value="HR">Croatia</option>
+                                    <option value="CU">Cuba</option>
+                                    <option value="CY">Cyprus</option>
+                                    <option value="CZ">Czech Republic</option>
+                                    <option value="DK">Denmark</option>
+                                    <option value="DJ">Djibouti</option>
+                                    <option value="DM">Dominica</option>
+                                    <option value="DO">Dominican Republic</option>
+                                    <option value="EC">Ecuador</option>
+                                    <option value="EG">Egypt</option>
+                                    <option value="SV">El Salvador</option>
+                                    <option value="GQ">Equatorial Guinea</option>
+                                    <option value="ER">Eritrea</option>
+                                    <option value="EE">Estonia</option>
+                                    <option value="SZ">Eswatini</option>
+                                    <option value="ET">Ethiopia</option>
+                                    <option value="FJ">Fiji</option>
+                                    <option value="FI">Finland</option>
+                                    <option value="FR">France</option>
+                                    <option value="GA">Gabon</option>
+                                    <option value="GM">Gambia</option>
+                                    <option value="GE">Georgia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="GH">Ghana</option>
+                                    <option value="GR">Greece</option>
+                                    <option value="GD">Grenada</option>
+                                    <option value="GT">Guatemala</option>
+                                    <option value="GN">Guinea</option>
+                                    <option value="GW">Guinea-Bissau</option>
+                                    <option value="GY">Guyana</option>
+                                    <option value="HT">Haiti</option>
+                                    <option value="HN">Honduras</option>
+                                    <option value="HU">Hungary</option>
+                                    <option value="IS">Iceland</option>
+                                    <option value="IN">India</option>
+                                    <option value="ID">Indonesia</option>
+                                    <option value="IR">Iran</option>
+                                    <option value="IQ">Iraq</option>
+                                    <option value="IE">Ireland</option>
+                                    <option value="IL">Israel</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="JM">Jamaica</option>
+                                    <option value="JP">Japan</option>
+                                    <option value="JO">Jordan</option>
+                                    <option value="KZ">Kazakhstan</option>
+                                    <option value="KE">Kenya</option>
+                                    <option value="KI">Kiribati</option>
+                                    <option value="KP">Korea, North</option>
+                                    <option value="KR">Korea, South</option>
+                                    <option value="KW">Kuwait</option>
+                                    <option value="KG">Kyrgyzstan</option>
+                                    <option value="LA">Laos</option>
+                                    <option value="LV">Latvia</option>
+                                    <option value="LB">Lebanon</option>
+                                    <option value="LS">Lesotho</option>
+                                    <option value="LR">Liberia</option>
+                                    <option value="LY">Libya</option>
+                                    <option value="LI">Liechtenstein</option>
+                                    <option value="LT">Lithuania</option>
+                                    <option value="LU">Luxembourg</option>
+                                    <option value="MG">Madagascar</option>
+                                    <option value="MW">Malawi</option>
+                                    <option value="MY">Malaysia</option>
+                                    <option value="MV">Maldives</option>
+                                    <option value="ML">Mali</option>
+                                    <option value="MT">Malta</option>
+                                    <option value="MH">Marshall Islands</option>
+                                    <option value="MR">Mauritania</option>
+                                    <option value="MU">Mauritius</option>
+                                    <option value="MX">Mexico</option>
+                                    <option value="FM">Micronesia</option>
+                                    <option value="MD">Moldova</option>
+                                    <option value="MC">Monaco</option>
+                                    <option value="MN">Mongolia</option>
+                                    <option value="ME">Montenegro</option>
+                                    <option value="MA">Morocco</option>
+                                    <option value="MZ">Mozambique</option>
+                                    <option value="MM">Myanmar</option>
+                                    <option value="NA">Namibia</option>
+                                    <option value="NR">Nauru</option>
+                                    <option value="NP">Nepal</option>
+                                    <option value="NL">Netherlands</option>
+                                    <option value="NZ">New Zealand</option>
+                                    <option value="NI">Nicaragua</option>
+                                    <option value="NE">Niger</option>
+                                    <option value="NG">Nigeria</option>
+                                    <option value="MK">North Macedonia</option>
+                                    <option value="NO">Norway</option>
+                                    <option value="OM">Oman</option>
+                                    <option value="PK">Pakistan</option>
+                                    <option value="PW">Palau</option>
+                                    <option value="PA">Panama</option>
+                                    <option value="PG">Papua New Guinea</option>
+                                    <option value="PY">Paraguay</option>
+                                    <option value="PE">Peru</option>
+                                    <option value="PH">Philippines</option>
+                                    <option value="PL">Poland</option>
+                                    <option value="PT">Portugal</option>
+                                    <option value="QA">Qatar</option>
+                                    <option value="RO">Romania</option>
+                                    <option value="RU">Russia</option>
+                                    <option value="RW">Rwanda</option>
+                                    <option value="KN">Saint Kitts and Nevis</option>
+                                    <option value="LC">Saint Lucia</option>
+                                    <option value="VC">Saint Vincent and the Grenadines</option>
+                                    <option value="WS">Samoa</option>
+                                    <option value="SM">San Marino</option>
+                                    <option value="ST">Sao Tome and Principe</option>
+                                    <option value="SA">Saudi Arabia</option>
+                                    <option value="SN">Senegal</option>
+                                    <option value="RS">Serbia</option>
+                                    <option value="SC">Seychelles</option>
+                                    <option value="SL">Sierra Leone</option>
+                                    <option value="SG">Singapore</option>
+                                    <option value="SK">Slovakia</option>
+                                    <option value="SI">Slovenia</option>
+                                    <option value="SB">Solomon Islands</option>
+                                    <option value="SO">Somalia</option>
+                                    <option value="ZA">South Africa</option>
+                                    <option value="SS">South Sudan</option>
+                                    <option value="ES">Spain</option>
+                                    <option value="LK">Sri Lanka</option>
+                                    <option value="SD">Sudan</option>
+                                    <option value="SR">Suriname</option>
+                                    <option value="SE">Sweden</option>
+                                    <option value="CH">Switzerland</option>
+                                    <option value="SY">Syria</option>
+                                    <option value="TW">Taiwan</option>
+                                    <option value="TJ">Tajikistan</option>
+                                    <option value="TZ">Tanzania</option>
+                                    <option value="TH">Thailand</option>
+                                    <option value="TL">Timor-Leste</option>
+                                    <option value="TG">Togo</option>
+                                    <option value="TO">Tonga</option>
+                                    <option value="TT">Trinidad and Tobago</option>
+                                    <option value="TN">Tunisia</option>
+                                    <option value="TR">Turkey</option>
+                                    <option value="TM">Turkmenistan</option>
+                                    <option value="TV">Tuvalu</option>
+                                    <option value="UG">Uganda</option>
+                                    <option value="UA">Ukraine</option>
+                                    <option value="AE">United Arab Emirates</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="US">United States</option>
+                                    <option value="UY">Uruguay</option>
+                                    <option value="UZ">Uzbekistan</option>
+                                    <option value="VU">Vanuatu</option>
+                                    <option value="VA">Vatican City</option>
+                                    <option value="VE">Venezuela</option>
+                                    <option value="VN">Vietnam</option>
+                                    <option value="YE">Yemen</option>
+                                    <option value="ZM">Zambia</option>
+                                    <option value="ZW">Zimbabwe</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-truck"></i> Shipping Method</h3>
+                        <div class="shipping-method selected" data-shipping="standard">
+                            <input type="radio" name="shipping" value="standard" id="shipping_standard" checked>
+                            <label for="shipping_standard">
+                                Standard Shipping
+                                <small>Delivery in 3-5 business days</small>
+                            </label>
+                            <span>${shipping === 0 ? 'Free' : '$15.00'}</span>
+                        </div>
+                        <div class="shipping-method" data-shipping="express">
+                            <input type="radio" name="shipping" value="express" id="shipping_express">
+                            <label for="shipping_express">
+                                Express Shipping
+                                <small>Delivery in 1-2 business days</small>
+                            </label>
+                            <span>$25.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
+                        <div class="payment-method selected" data-payment="credit">
+                            <input type="radio" name="payment" value="credit" id="payment_credit" checked>
+                            <label for="payment_credit">
+                                Credit / Debit Card
+                                <small>Visa, Mastercard, Amex</small>
+                            </label>
+                            <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i>
+                        </div>
+                        <div class="payment-method" data-payment="paypal">
+                            <input type="radio" name="payment" value="paypal" id="payment_paypal">
+                            <label for="payment_paypal">
+                                PayPal
+                                <small>Pay with your PayPal account</small>
+                            </label>
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="order-sidebar">
+                <h3>Your Order</h3>
+                <div class="order-items">
+                    ${cart.map(item => `
+                        <div class="order-item">
+                            <div class="order-item-info">
+                                <h4>${item.name}</h4>
+                                <p>Qty: ${item.quantity}${item.size ? ` | Size: ${item.size}` : ''}</p>
+                            </div>
+                            <div class="order-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="order-total">
+                    <div class="order-total-row">
+                        <span>Subtotal</span>
+                        <span>$${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div class="order-total-row" id="shippingRow">
+                        <span>Shipping</span>
+                        <span id="shippingAmount">${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
+                    </div>
+                    <div class="order-total-row">
+                        <span>Tax (10%)</span>
+                        <span>$${tax.toFixed(2)}</span>
+                    </div>
+                    <div class="order-total-row grand-total">
+                        <span>Total</span>
+                        <span id="grandTotal">$${total.toFixed(2)}</span>
+                    </div>
+                </div>
+                <button class="place-order-btn" id="placeOrderBtn">Place Order</button>
+                <a href="cart.html" class="back-to-cart"> Back to Cart</a>
+            </div>
+        `;
+        
+        attachEvents();
+    }
+    
+    function attachEvents() {
+        document.querySelectorAll('.shipping-method').forEach(method => {
+            method.addEventListener('click', () => {
+                document.querySelectorAll('.shipping-method').forEach(m => m.classList.remove('selected'));
+                method.classList.add('selected');
+                const radio = method.querySelector('input[type="radio"]');
+                if (radio) radio.checked = true;
+                updateTotals();
+            });
+        });
+        
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', () => {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                method.classList.add('selected');
+                const radio = method.querySelector('input[type="radio"]');
+                if (radio) radio.checked = true;
+            });
+        });
+        
+        const placeOrderBtn = document.getElementById('placeOrderBtn');
+        if (placeOrderBtn) {
+            placeOrderBtn.addEventListener('click', () => {
+                const firstName = document.getElementById('firstName')?.value.trim();
+                const lastName = document.getElementById('lastName')?.value.trim();
+                const email = document.getElementById('email')?.value.trim();
+                const phone = document.getElementById('phone')?.value.trim();
+                const address = document.getElementById('address')?.value.trim();
+                const city = document.getElementById('city')?.value.trim();
+                const zip = document.getElementById('zip')?.value.trim();
+                const country = document.getElementById('country')?.value;
+                
+                if (!firstName || !lastName || !email || !phone || !address || !city || !zip || !country) {
+                    showNotification('Please fill in all required fields', true);
+                    return;
+                }
+                
+                if (!email.includes('@')) {
+                    showNotification('Please enter a valid email address', true);
+                    return;
+                }
+                
+                showNotification('Order placed successfully! Thank you for your purchase.');
+                localStorage.removeItem('sportpro_cart');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            });
+        }
+    }
+    
+    function updateTotals() {
+        const cart = loadCart();
+        let subtotal = 0;
+        cart.forEach(item => { subtotal += item.price * item.quantity; });
+        
+        const selectedShipping = document.querySelector('.shipping-method.selected input');
+        let shippingCost = 15;
+        if (selectedShipping && selectedShipping.value === 'express') {
+            shippingCost = 25;
+        } else {
+            shippingCost = subtotal > 100 ? 0 : 15;
+        }
+        
+        const tax = subtotal * 0.1;
+        const total = subtotal + shippingCost + tax;
+        
+        const shippingAmountSpan = document.getElementById('shippingAmount');
+        if (shippingAmountSpan) {
+            shippingAmountSpan.innerText = shippingCost === 0 ? 'Free' : '$' + shippingCost.toFixed(2);
+        }
+        
+        const grandTotalSpan = document.getElementById('grandTotal');
+        if (grandTotalSpan) {
+            grandTotalSpan.innerText = '$' + total.toFixed(2);
+        }
+    }
+    
+    updateCartCount();
+    renderCheckout();
+</script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sport Products | SportPro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\components.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    
+    <style>
+        .page-header { text-align: center; margin-bottom: 40px; padding: 20px 0 10px; }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .page-header p { color: var(--text-gray); }
+        .back-link { display: inline-block; margin-bottom: 30px; color: var(--secondary); text-decoration: none; font-size: 1rem; transition: all 0.3s ease; }
+        .back-link:hover { margin-right: 5px; color: var(--accent); }
+        .shop-layout { display: grid; grid-template-columns: 280px 1fr; gap: var(--spacing-2xl); }
+        .shop-sidebar { background: rgba(255, 255, 255, 0.03); padding: var(--spacing-xl); border-radius: var(--radius-lg); height: fit-content; }
+        .filter-section { margin-bottom: var(--spacing-xl); padding-bottom: var(--spacing-lg); border-bottom: 1px solid rgba(100, 255, 218, 0.1); }
+        .filter-section h3 { margin-bottom: var(--spacing-md); font-size: 1.1rem; }
+        .filter-section label { display: block; margin-bottom: var(--spacing-sm); color: var(--text-gray); cursor: pointer; }
+        .filter-section input[type="checkbox"] { margin-right: var(--spacing-sm); accent-color: var(--secondary); }
+        .price-range input[type="range"] { width: 100%; margin: 10px 0; accent-color: var(--secondary); }
+        .price-inputs { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+        .price-inputs input { width: 80px; padding: 6px; background: var(--primary-light); border: 1px solid rgba(100, 255, 218, 0.2); border-radius: var(--radius-sm); color: var(--text-light); }
+        .filter-reset { width: 100%; margin-top: var(--spacing-md); }
+        .shop-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xl); flex-wrap: wrap; gap: var(--spacing-md); }
+        .sort-select { background: var(--primary-light); border: 1px solid rgba(100, 255, 218, 0.3); padding: 10px 16px; border-radius: var(--radius-md); color: var(--text-light); font-size: 14px; cursor: pointer; outline: none; }
+        .sort-select option { background: var(--primary-dark); color: var(--text-light); }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-bottom: 40px; }
+        .product-card { background: rgba(255, 255, 255, 0.03); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition-normal); position: relative; }
+        .product-card:hover { transform: translateY(-5px); background: rgba(100, 255, 218, 0.1); }
+        .product-badge { position: absolute; top: var(--spacing-md); left: var(--spacing-md); background: var(--accent); color: white; padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.8rem; z-index: 2; }
+        .product-image { position: relative; height: 250px; overflow: hidden; }
+        .product-image .image-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .product-actions { position: absolute; bottom: -50px; left: 0; right: 0; display: flex; justify-content: center; gap: var(--spacing-sm); padding: var(--spacing-md); background: rgba(10, 25, 47, 0.9); transition: var(--transition-normal); }
+        .product-card:hover .product-actions { bottom: 0; }
+        .product-actions button { background: var(--secondary); border: none; width: 40px; height: 40px; border-radius: var(--radius-full); cursor: pointer; transition: var(--transition-normal); }
+        .product-actions button:hover { transform: scale(1.1); background: var(--accent); }
+        .product-info { padding: var(--spacing-md); }
+        .product-info h3 { margin-bottom: var(--spacing-xs); font-size: 1rem; }
+        .product-info h3 a { color: var(--text-white); text-decoration: none; cursor: pointer; }
+        .product-category { color: var(--text-gray); font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); }
+        .price { margin: var(--spacing-sm) 0; }
+        .current-price { color: var(--secondary); font-size: var(--font-size-lg); font-weight: 600; }
+        .rating { color: var(--warning); font-size: var(--font-size-sm); }
+        .rating span { color: var(--text-gray); margin-left: var(--spacing-xs); }
+        .pagination-wrapper { margin-top: 40px; margin-bottom: 20px; }
+        .pagination { display: flex; justify-content: center; gap: var(--spacing-sm); }
+        .pagination a { padding: var(--spacing-sm) var(--spacing-md); background: rgba(255, 255, 255, 0.05); color: var(--text-light); text-decoration: none; border-radius: var(--radius-md); transition: var(--transition-normal); }
+        .pagination a:hover, .pagination a.active { background: var(--secondary); color: var(--primary-dark); }
+        .pagination a.disabled { opacity: 0.3; pointer-events: none; }
+        .no-products { text-align: center; padding: 80px 20px; background: rgba(255, 255, 255, 0.03); border-radius: var(--radius-lg); border: 2px dashed rgba(100, 255, 218, 0.3); }
+        .no-products i { font-size: 4rem; color: var(--secondary); margin-bottom: 20px; opacity: 0.7; }
+        .no-products h3 { font-size: 1.8rem; margin-bottom: 10px; color: var(--text-white); }
+        .no-products p { color: var(--text-gray); margin-bottom: 20px; }
+        .no-products .btn-reset { background: var(--secondary); color: var(--primary-dark); border: none; padding: 10px 30px; border-radius: var(--radius-full); cursor: pointer; font-weight: 600; transition: var(--transition-normal); }
+        .no-products .btn-reset:hover { background: var(--accent); transform: scale(1.05); }
+        @media (max-width: 1024px) { .products-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .shop-layout { grid-template-columns: 1fr; } .shop-sidebar { order: 2; } }
+    </style>
+</head>
+<body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header"><h3>Menu</h3><button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button></div>
+    <nav class="sidebar-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="sidebar-contact"><h4>Contact Us</h4><p><i class="fas fa-phone"></i> 09103203789</p><p><i class="fas fa-envelope"></i> info@sportpro.com</p></div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo"><a href="index.html"><h2>Sport<span>Pro</span></h2></a></div>
+            <nav class="desktop-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html" class="active">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button id="openSidebar" class="icon-btn menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<main style="margin-top: 100px; min-height: calc(100vh - 500px);">
+    <div class="container">
+        <a href="shop.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to all sports</a>
+        <div class="page-header" id="pageHeader"><h1 id="sportName">Loading...</h1><p id="sportDesc">Professional equipment for your sport</p></div>
+        <div class="shop-layout">
+            <aside class="shop-sidebar">
+                <div class="filter-section"><h3><i class="fas fa-tag"></i> Brands</h3>
+                    <label><input type="checkbox" class="brand-filter" value="nike"> Nike</label>
+                    <label><input type="checkbox" class="brand-filter" value="adidas"> Adidas</label>
+                    <label><input type="checkbox" class="brand-filter" value="puma"> Puma</label>
+                    <label><input type="checkbox" class="brand-filter" value="underarmour"> Under Armour</label>
+                    <label><input type="checkbox" class="brand-filter" value="reebok"> Reebok</label>
+                    <label><input type="checkbox" class="brand-filter" value="newbalance"> New Balance</label>
+                </div>
+                <div class="filter-section"><h3><i class="fas fa-dollar-sign"></i> Price Range</h3>
+                    <div class="price-range"><input type="range" id="priceSlider" min="0" max="500" value="500"><div class="price-inputs"><input type="number" id="minPrice" placeholder="Min" value="0"><span>-</span><input type="number" id="maxPrice" placeholder="Max" value="500"></div></div>
+                </div>
+                <div class="filter-section"><h3><i class="fas fa-star"></i> Rating</h3>
+                    <label><input type="checkbox" class="rating-filter" value="4.5"> ★★★★★ & up (4.5+)</label>
+                    <label><input type="checkbox" class="rating-filter" value="4"> ★★★★☆ & up (4.0+)</label>
+                    <label><input type="checkbox" class="rating-filter" value="3"> ★★★☆☆ & up (3.0+)</label>
+                </div>
+                <button class="btn-secondary filter-reset" id="resetFilters">Reset All Filters</button>
+            </aside>
+            <div class="shop-products">
+                <div class="shop-toolbar"><p id="productsCount">Showing products</p><select id="sortSelect" class="sort-select"><option value="default">Sort by: Default</option><option value="price-low">Price: Low to High</option><option value="price-high">Price: High to Low</option><option value="rating">Sort by: Best Rating</option></select></div>
+                <div class="products-grid" id="productsGrid"></div>
+                <div class="pagination-wrapper"><div class="pagination" id="pagination"></div></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\home.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About US</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p><div class="payment-methods"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-amex"></i></div></div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const sportSlug = urlParams.get('sport');
+    
+   
+    const allSports = [
+    "football", "basketball", "tennis", "volleyball", "table-tennis", "badminton", "baseball", "american-football",
+    "field-hockey", "lacrosse", "handball", "billiards", "bowling", "golf", "disc-golf", "padel", "squash",
+    "racquetball", "karate", "boxing", "taekwondo", "wrestling", "judo", "jiu-jitsu", "fencing", "kungfu",
+    "muay-thai", "swimming", "water-polo", "surfing", "bodyboarding", "kayaking", "rowing", "diving",
+    "synchro", "jetski", "fishing", "snorkeling", "running", "cycling", "mtb", "yoga", "gym", "gymnastics",
+    "pilates", "weightlifting", "calisthenics", "crossfit", "hiking", "climbing", "camping", "skiing",
+    "snowboarding", "ice-skating", "ice-hockey", "curling", "sledding", "cricket", "rugby", "softball",
+    "beach-volleyball", "motocross", "motorsport", "paragliding", "skydiving", "archery", "darts", "chess",
+    "board-games", "esports", "wheelchair", "kite", "juggling", "skateboarding", "roller-skating", "scooter", "track-field"
+    ];
+    
+    const sportNames = {
+    football: "Football", basketball: "Basketball", tennis: "Tennis", volleyball: "Volleyball", "table-tennis": "Table Tennis",
+    badminton: "Badminton", baseball: "Baseball", "american-football": "American Football", "field-hockey": "Field Hockey",
+    lacrosse: "Lacrosse", handball: "Handball", billiards: "Billiards", bowling: "Bowling", golf: "Golf", "disc-golf": "Disc Golf",
+    padel: "Padel", squash: "Squash", racquetball: "Racquetball", karate: "Karate", boxing: "Boxing", taekwondo: "Taekwondo",
+    wrestling: "Wrestling", judo: "Judo", "jiu-jitsu": "Jiu-Jitsu", fencing: "Fencing", kungfu: "Kung Fu", "muay-thai": "Muay Thai",
+    swimming: "Swimming", "water-polo": "Water Polo", surfing: "Surfing", bodyboarding: "Bodyboarding", kayaking: "Kayaking",
+    rowing: "Rowing", diving: "Scuba Diving", synchro: "Synchronized Swimming", jetski: "Jet Ski", fishing: "Fishing",
+    snorkeling: "Snorkeling", running: "Running", cycling: "Cycling", mtb: "Mountain Biking", yoga: "Yoga", gym: "Gym & Fitness",
+    gymnastics: "Gymnastics", pilates: "Pilates", weightlifting: "Weightlifting", calisthenics: "Calisthenics", crossfit: "CrossFit",
+    hiking: "Hiking", climbing: "Rock Climbing", camping: "Camping", skiing: "Skiing", snowboarding: "Snowboarding",
+    "ice-skating": "Ice Skating", "ice-hockey": "Ice Hockey", curling: "Curling", sledding: "Sledding", cricket: "Cricket",
+    rugby: "Rugby", softball: "Softball", "beach-volleyball": "Beach Volleyball", motocross: "Motocross", motorsport: "Motorsport",
+    paragliding: "Paragliding", skydiving: "Skydiving", archery: "Archery", darts: "Darts", chess: "Chess", "board-games": "Board Games",
+    esports: "Esports", wheelchair: "Wheelchair Sports", kite: "Kite Flying", juggling: "Juggling", skateboarding: "Skateboarding",
+    "roller-skating": "Roller Skating", scooter: "Scooter", "track-field": "Track & Field"
+};
+    
+    const currentSport = allSports.includes(sportSlug) ? sportSlug : "football";
+    const sportDisplayName = sportNames[currentSport] || "Sports";
+    const sportIndex = allSports.indexOf(currentSport);
+    
+    document.getElementById("sportName").innerHTML = sportDisplayName;
+    document.getElementById("sportDesc").innerHTML = `Professional ${sportDisplayName} equipment for all levels`;
+    
+    
+    const categories = ["Pro", "Elite", "Premium", "Professional", "Training", "Competition"];
+    const types = ["Equipment", "Gear", "Set", "Kit", "Accessory", "Bag", "Shoes", "Clothing", "Gloves", "Protective Gear", "Training Mat", "Water Bottle"];
+    const brands = ["nike", "adidas", "puma", "underarmour", "reebok", "newbalance"];
+    const prices = [199.99, 179.99, 129.99, 249.99, 59.99, 89.99, 79.99, 69.99, 24.99, 29.99, 39.99, 19.99];
+    const ratings = [4.7, 4.6, 4.5, 4.8, 4.4, 4.5, 4.6, 4.5, 4.3, 4.4, 4.7, 4.2];
+    
+    const products = [];
+    for (let i = 0; i < 12; i++) {
+        const productId = (sportIndex * 12) + i + 1;
+        products.push({
+            id: productId,
+            name: `${categories[i % categories.length]} ${sportDisplayName} ${types[i % types.length]}`,
+            category: currentSport,
+            brand: brands[i % brands.length],
+            price: prices[i % prices.length],
+            rating: ratings[i % ratings.length],
+            badge: i === 0 ? "Premium" : i === 2 ? "Sale" : i === 5 ? "New" : ""
+        });
+    }
+    
+    let currentBrands = [];
+    let currentRating = 0;
+    let maxPrice = 500;
+    let currentSort = "default";
+    let currentPage = 1;
+    const itemsPerPage = 6;
+    
+    function filterProducts() {
+        let filtered = [...products];
+        if (currentBrands.length > 0) filtered = filtered.filter(p => currentBrands.includes(p.brand));
+        filtered = filtered.filter(p => p.price <= maxPrice);
+        if (currentRating > 0) filtered = filtered.filter(p => p.rating >= currentRating);
+        if (currentSort === "price-low") filtered.sort((a, b) => a.price - b.price);
+        else if (currentSort === "price-high") filtered.sort((a, b) => b.price - a.price);
+        else if (currentSort === "rating") filtered.sort((a, b) => b.rating - a.rating);
+        return filtered;
+    }
+    
+    function renderProducts() {
+        const filtered = filterProducts();
+        const totalPages = Math.ceil(filtered.length / itemsPerPage);
+        const start = (currentPage - 1) * itemsPerPage;
+        const paginated = filtered.slice(start, start + itemsPerPage);
+        
+        document.getElementById("productsCount").innerHTML = `Showing ${start + 1}–${Math.min(start + itemsPerPage, filtered.length)} of ${filtered.length} products`;
+        const grid = document.getElementById("productsGrid");
+        
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="no-products" style="grid-column: 1/-1;"><i class="fas fa-search"></i><h3>No Products Found</h3><p>Try adjusting your filters.</p><button class="btn-reset" id="resetFromEmpty">Browse All Products</button></div>`;
+            document.getElementById("resetFromEmpty")?.addEventListener("click", () => document.getElementById("resetFilters").click());
+            document.getElementById("pagination").innerHTML = '';
+            return;
+        }
+        
+        grid.innerHTML = paginated.map(p => `
+            <div class="product-card">
+                ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+                <div class="product-image">
+                    <div class="image-placeholder product-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>${p.name}</p>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="quick-view" onclick="window.location.href='product-detail.html?id=${p.id}'"><i class="fas fa-eye"></i></button>
+                        <button class="add-wishlist" data-id="${p.id}"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3><a href="product-detail.html?id=${p.id}" style="color: var(--text-white); text-decoration: none;">${p.name}</a></h3>
+                    <div class="product-category">${sportDisplayName}</div>
+                    <div class="price"><span class="current-price">$${p.price.toFixed(2)}</span></div>
+                    <div class="rating">${'★'.repeat(Math.floor(p.rating))}${p.rating % 1 ? '½' : ''}${'☆'.repeat(5 - Math.ceil(p.rating))} <span>(${Math.floor(p.rating * 10)})</span></div>
+                </div>
+            </div>
+        `).join('');
+        
+        renderPagination(totalPages);
+    }
+    
+    function renderPagination(totalPages) {
+        const pagination = document.getElementById("pagination");
+        if (totalPages <= 1) { pagination.innerHTML = ''; return; }
+        let html = `<a href="#" data-page="${currentPage - 1}" class="${currentPage === 1 ? 'disabled' : ''}">«</a>`;
+        for (let i = 1; i <= Math.min(totalPages, 5); i++) html += `<a href="#" data-page="${i}" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
+        if (totalPages > 5) html += `<span>...</span><a href="#" data-page="${totalPages}">${totalPages}</a>`;
+        html += `<a href="#" data-page="${currentPage + 1}" class="${currentPage === totalPages ? 'disabled' : ''}">»</a>`;
+        pagination.innerHTML = html;
+        pagination.querySelectorAll("a[data-page]").forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                let page = parseInt(link.dataset.page);
+                if (page >= 1 && page <= totalPages) { currentPage = page; renderProducts(); }
+            });
+        });
+    }
+    
+    document.querySelectorAll(".brand-filter").forEach(cb => {
+        cb.addEventListener("change", () => {
+            currentBrands = Array.from(document.querySelectorAll(".brand-filter:checked")).map(cb => cb.value);
+            currentPage = 1; renderProducts();
+        });
+    });
+    
+    document.querySelectorAll(".rating-filter").forEach(cb => {
+        cb.addEventListener("change", () => {
+            const checked = Array.from(document.querySelectorAll(".rating-filter:checked"));
+            currentRating = checked.length ? Math.min(...checked.map(cb => parseFloat(cb.value))) : 0;
+            currentPage = 1; renderProducts();
+        });
+    });
+    
+    document.getElementById("priceSlider").addEventListener("input", (e) => {
+        maxPrice = parseInt(e.target.value);
+        document.getElementById("maxPrice").value = maxPrice;
+        currentPage = 1; renderProducts();
+    });
+    
+    document.getElementById("maxPrice").addEventListener("change", (e) => {
+        maxPrice = parseInt(e.target.value) || 500;
+        document.getElementById("priceSlider").value = maxPrice;
+        currentPage = 1; renderProducts();
+    });
+    
+    document.getElementById("sortSelect").addEventListener("change", (e) => {
+        currentSort = e.target.value;
+        currentPage = 1; renderProducts();
+    });
+    
+    document.getElementById("resetFilters").addEventListener("click", () => {
+        currentBrands = [];
+        currentRating = 0;
+        maxPrice = 500;
+        currentSort = "default";
+        currentPage = 1;
+        document.querySelectorAll(".brand-filter").forEach(cb => cb.checked = false);
+        document.querySelectorAll(".rating-filter").forEach(cb => cb.checked = false);
+        document.getElementById("priceSlider").value = 500;
+        document.getElementById("maxPrice").value = 500;
+        document.getElementById("sortSelect").value = "default";
+        renderProducts();
+    });
+    
+    renderProducts();
+</script>
+</body>
+</html>

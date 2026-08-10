@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | SportPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    <style>
+        .cart-header { text-align: center; margin-bottom: 40px; padding: 40px 0 20px; }
+        .cart-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .cart-header p { color: var(--text-gray); }
+        .cart-layout { display: grid; grid-template-columns: 1fr 350px; gap: 40px; margin-bottom: 60px; }
+        .cart-table { background: rgba(255,255,255,0.03); border-radius: var(--radius-lg); overflow: hidden; }
+        .cart-table table { width: 100%; border-collapse: collapse; }
+        .cart-table th { text-align: left; padding: 18px 20px; background: rgba(100,255,218,0.05); color: var(--secondary); font-weight: 600; }
+        .cart-table td { padding: 20px; border-bottom: 1px solid rgba(100,255,218,0.1); vertical-align: middle; }
+        .cart-product-info h4 { margin-bottom: 5px; }
+        .cart-product-info h4 a { color: var(--text-white); text-decoration: none; }
+        .cart-product-info .cart-product-category { color: var(--text-gray); font-size: 0.8rem; }
+        
+        .cart-quantity { display: flex; align-items: center; gap: 10px; }
+        .cart-qty-btn { 
+            width: 34px; height: 34px; 
+            background: rgba(255,255,255,0.1); 
+            border: 1px solid rgba(100,255,218,0.3); 
+            border-radius: var(--radius-md); 
+            color: #FFFFFF; 
+            cursor: pointer; 
+            font-size: 1.1rem; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .cart-qty-btn:hover { background: var(--secondary); color: var(--primary-dark); border-color: var(--secondary); }
+        
+        .cart-qty-input { 
+            width: 55px; height: 34px; 
+            text-align: center; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(100,255,218,0.2); 
+            border-radius: var(--radius-md); 
+            color: var(--text-light); 
+            font-size: 1.1rem; 
+            font-weight: 600;
+        }
+        .cart-qty-input::-webkit-outer-spin-button,
+        .cart-qty-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .cart-remove { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 1.1rem; transition: all 0.3s ease; }
+        .cart-remove:hover { color: #ff4444; transform: scale(1.1); }
+        .cart-price { font-weight: 600; color: var(--secondary); }
+        .cart-total-price { font-weight: 700; color: var(--secondary); font-size: 1.1rem; }
+        
+        .cart-sidebar { background: rgba(255,255,255,0.03); border-radius: var(--radius-lg); padding: 25px; height: fit-content; position: sticky; top: 100px; }
+        .cart-sidebar h3 { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(100,255,218,0.1); }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-gray); }
+        .summary-row.total { margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(100,255,218,0.1); font-size: 1.2rem; font-weight: 700; color: var(--text-white); }
+        .summary-row.total span:last-child { color: var(--secondary); }
+        .checkout-btn { width: 100%; background: var(--secondary); color: var(--primary-dark); border: none; padding: 14px; border-radius: var(--radius-full); font-weight: 600; cursor: pointer; margin-top: 20px; transition: all 0.3s ease; }
+        .checkout-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+        .continue-shop { display: block; text-align: center; margin-top: 15px; color: var(--text-gray); text-decoration: none; transition: all 0.3s ease; }
+        .continue-shop:hover { color: var(--secondary); }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            grid-column: 1/-1;
+        }
+        .empty-cart i {
+            font-size: 5rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        .empty-cart h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--text-white);
+        }
+        .empty-cart p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 992px) { .cart-layout { grid-template-columns: 1fr; } .cart-sidebar { position: static; order: 2; } }
+        @media (max-width: 768px) { .cart-table { overflow-x: auto; } .cart-table table { min-width: 500px; } }
+    </style>
+</head>
+<body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header"><h3>Menu</h3><button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button></div>
+    <nav class="sidebar-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="sidebar-contact"><h4>Contact Us</h4><p><i class="fas fa-phone"></i> 09103203789</p><p><i class="fas fa-envelope"></i> info@sportpro.com</p></div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo"><a href="index.html"><h2>Sport<span>Pro</span></h2></a></div>
+            <nav class="desktop-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn"><i class="fas fa-search"></i></a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;"><i class="fas fa-heart"></i><span class="wishlist-count">0</span></a>
+                <a href="cart.html" class="icon-btn" style="position: relative;"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                <button id="openSidebar" class="icon-btn menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="searchModal" class="search-modal"><div class="search-modal-content"><button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button><div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" placeholder="Search..." id="searchInput"></div><div class="search-results" id="searchResults"></div></div></div>
+
+<main style="margin-top: 100px; min-height: calc(100vh - 500px);">
+    <div class="container">
+        <div class="cart-header">
+            <h1>Shopping Cart</h1>
+            <p>Review your items and proceed to checkout</p>
+        </div>
+        <div class="cart-layout" id="cartContent"><div style="text-align:center;padding:50px;">Loading your cart...</div></div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\home.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About US</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\account.html">Account</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p><div class="payment-methods"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-amex"></i></div></div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+
+<script>
+    const CART_KEY = 'sportpro_cart';
+    
+    function loadCart() { 
+        const saved = localStorage.getItem(CART_KEY);
+        return saved ? JSON.parse(saved) : []; 
+    }
+    
+    function saveCart(cart) { 
+        localStorage.setItem(CART_KEY, JSON.stringify(cart)); 
+        renderCart(); 
+        updateCartCount(); 
+    }
+    
+    function updateCartCount() {
+        const cart = loadCart();
+        const total = cart.reduce((s, i) => s + i.quantity, 0);
+        document.querySelectorAll('.cart-count').forEach(el => { if (el) el.textContent = total; });
+    }
+    
+    function showNotification(msg, isError = false) {
+        const n = document.createElement('div');
+        n.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${msg}`;
+        n.style.cssText = `position:fixed;bottom:20px;right:20px;background:${isError ? '#EF4444' : '#10B981'};color:white;padding:12px 24px;border-radius:8px;z-index:10000;animation:slideInRight 0.3s ease;`;
+        document.body.appendChild(n);
+        setTimeout(() => n.remove(), 3000);
+    }
+    
+    function renderCart() {
+        const container = document.getElementById('cartContent');
+        const cart = loadCart();
+        if (!container) return;
+        
+        if (cart.length === 0) {
+            container.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Your cart is empty</h3>
+                    <p>Looks like you haven't added any items to your cart yet.</p>
+                    <a href="shop.html" class="btn-primary">Continue Shopping</a>
+                </div>
+            `;
+            return;
+        }
+        
+        let subtotal = 0;
+        let html = `<div class="cart-table"><table><thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th></th></tr></thead><tbody>`;
+        
+        cart.forEach(item => {
+            const total = item.price * item.quantity;
+            subtotal += total;
+            html += `<tr data-id="${item.id}">
+                <td>
+                    <div class="cart-product-info">
+                        <h4><a href="product-detail.html?id=${item.id}">${item.name}</a></h4>
+                        <div class="cart-product-category">${item.category || 'Sports'}${item.size ? ` / Size: ${item.size}` : ''}</div>
+                    </div>
+                </td>
+                <td class="cart-price">$${item.price.toFixed(2)}</td>
+                <td>
+                    <div class="cart-quantity">
+                        <button class="cart-qty-btn" data-action="minus" data-id="${item.id}">-</button>
+                        <input type="number" class="cart-qty-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                        <button class="cart-qty-btn" data-action="plus" data-id="${item.id}">+</button>
+                    </div>
+                </td>
+                <td class="cart-total-price">$${total.toFixed(2)}</td>
+                <td><button class="cart-remove" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button></td>
+            </tr>`;
+        });
+        
+        const shipping = subtotal > 100 ? 0 : 15;
+        const tax = subtotal * 0.1;
+        const total = subtotal + shipping + tax;
+        
+        html += `</tbody></table></div>
+            <div class="cart-sidebar">
+                <h3>Order Summary</h3>
+                <div class="summary-row"><span>Subtotal</span><span>$${subtotal.toFixed(2)}</span></div>
+                <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span></div>
+                <div class="summary-row"><span>Estimated Tax</span><span>$${tax.toFixed(2)}</span></div>
+                <div class="summary-row total"><span>Total</span><span>$${total.toFixed(2)}</span></div>
+                <button class="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+                <a href="shop.html" class="continue-shop"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+            </div>
+        `;
+        
+        container.innerHTML = html;
+        
+        attachCartEvents();
+    }
+    
+    function attachCartEvents() {
+        document.querySelectorAll('.cart-qty-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.dataset.id;
+                const input = document.querySelector(`.cart-qty-input[data-id="${id}"]`);
+                if (!input) return;
+                let val = parseInt(input.value) || 1;
+                
+                if (this.dataset.action === 'plus') {
+                    val++;
+                } else if (this.dataset.action === 'minus') {
+                    val--;
+                }
+                
+                if (val >= 1) {
+                    input.value = val;
+                    updateQuantity(id, val);
+                }
+            });
+        });
+        
+        document.querySelectorAll('.cart-qty-input').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const id = this.dataset.id;
+                let val = parseInt(this.value);
+                if (isNaN(val) || val < 1) val = 1;
+                this.value = val;
+                updateQuantity(id, val);
+            });
+        });
+        
+        document.querySelectorAll('.cart-remove').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.dataset.id;
+                removeItem(id);
+            });
+        });
+    }
+    
+    function removeItem(id) {
+        // مهم: id رو به string تبدیل کن برای مقایسه
+        const stringId = String(id);
+        let cart = loadCart();
+        
+        // پیدا کردن آیتم
+        const item = cart.find(i => String(i.id) === stringId);
+        if (!item) {
+            showNotification('Item not found', true);
+            return;
+        }
+        
+        // فیلتر کردن
+        const newCart = cart.filter(i => String(i.id) !== stringId);
+        
+        // ذخیره کردن
+        localStorage.setItem(CART_KEY, JSON.stringify(newCart));
+        
+        // بروزرسانی
+        renderCart();
+        updateCartCount();
+        
+        showNotification(`${item.name} removed from cart`);
+    }
+    
+    function updateQuantity(id, newQty) {
+        const stringId = String(id);
+        let cart = loadCart();
+        const item = cart.find(i => String(i.id) === stringId);
+        if (!item) return;
+        
+        if (newQty <= 0) {
+            removeItem(id);
+            return;
+        }
+        
+        item.quantity = newQty;
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        renderCart();
+        updateCartCount();
+    }
+    
+    updateCartCount();
+    renderCart();
+</script>
+</body>
+</html>

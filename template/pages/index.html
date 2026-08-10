@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Professional Sports Shop Template - Fully responsive, customizable, and modern design">
+    <title>SportPro | Premium Sports Shop Template</title>
+    
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\components.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+</head>
+<body>
+
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h3>Menu</h3>
+        <button id="closeSidebar" class="close-sidebar">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <ul>
+            <li><a href="D:\boot\sports-shop-template\template\pages\index.html">Home</a></li>
+            <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+            <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About</a></li>
+            <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+            <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <div class="sidebar-contact">
+        <h4>Contact Us</h4>
+        <p><i class="fas fa-phone"></i> 09103203789</p>
+        <p><i class="fas fa-envelope"></i> info@sportpro.com</p>
+    </div>
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo">
+                <a href="D:\boot\sports-shop-template\template\pages\index.html">
+                    <h2>Sport<span>Pro</span></h2>
+                </a>
+            </div>
+            
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\index.html" class="active">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button id="openSidebar" class="icon-btn menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="searchModal" class="search-modal">
+    <div class="search-modal-content">
+        <button id="closeSearch" class="close-search">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search sports..." id="searchInput">
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+
+
+<section class="hero">
+    <div class="hero-slider">
+        <div class="slide active">
+            <div class="slide-bg">
+                <img src="D:\boot\sports-shop-template\documentation\assets\images\hero\hero-1.jpg" alt="Hero Image" class="hero-bg-img" style="display: none;" onerror="this.style.display='none'">
+                <div class="image-placeholder dark-bg">
+                    <div class="placeholder-content">
+                        <i class="fas fa-image fa-3x"></i>
+                        <p>Hero Image Placeholder</p>
+                    </div>
+                </div>
+            </div>
+            <div style="position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; z-index: 10;">
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-primary" style="display: inline-block;">Shop Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        
+       
+        <div class="slide">
+            <div class="slide-bg">
+                <img src="D:\boot\sports-shop-template\documentation\assets\images\hero\hero-2.jpg" alt="Hero Image" class="hero-bg-img" style="display: none;" onerror="this.style.display='none'">
+                <div class="image-placeholder dark-bg">
+                    <div class="placeholder-content">
+                        <i class="fas fa-image fa-3x"></i>
+                        <p>Hero Image Placeholder</p>
+                    </div>
+                </div>
+            </div>
+            <div style="position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; z-index: 10;">
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-primary" style="display: inline-block;">Explore <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        
+        
+        <div class="slide">
+            <div class="slide-bg">
+                <img src="D:\boot\sports-shop-template\documentation\assets\images\hero\hero-3.jpg" alt="Hero Image" class="hero-bg-img" style="display: none;" onerror="this.style.display='none'">
+                <div class="image-placeholder dark-bg">
+                    <div class="placeholder-content">
+                        <i class="fas fa-image fa-3x"></i>
+                        <p>Hero Image Placeholder</p>
+                    </div>
+                </div>
+            </div>
+            <div style="position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; z-index: 10;">
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-primary" style="display: inline-block;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+    <div class="slider-dots"></div>
+</section>
+
+
+<section class="features">
+    <div class="container">
+        <div class="section-header">
+            <h2>Why Choose Us</h2>
+            <p>Experience the difference with SportPro</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                <h3>Fast Delivery</h3>
+                <p>Same-day dispatch on all orders. Get your gear when you need it.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3>Premium Quality</h3>
+                <p>Top-tier materials and craftsmanship in every product.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Professional customer service ready to help anytime.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="categories">
+    <div class="container">
+        <div class="section-header">
+            <h2>Shop by Category</h2>
+            <p>Find what you're looking for</p>
+        </div>
+        
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\categories\running-shoes.jpg" alt="Running Shoes" class="category-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder medium-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-shoe-prints fa-2x"></i>
+                            <p>Running Shoes</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Running Shoes</h3>
+                <p>24 products</p>
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-link">Shop Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\categories\activewear.jpg" alt="Activewear" class="category-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder medium-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-tshirt fa-2x"></i>
+                            <p>Activewear</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Activewear</h3>
+                <p>42 products</p>
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-link">Shop Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\categories\fitness.jpg" alt="Fitness Equipment" class="category-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder medium-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-dumbbell fa-2x"></i>
+                            <p>Fitness Equipment</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Fitness Equipment</h3>
+                <p>18 products</p>
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-link">Shop Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\categories\swimwear.jpg" alt="Swimwear" class="category-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder medium-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-water fa-2x"></i>
+                            <p>Swimwear</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Swimwear</h3>
+                <p>12 products</p>
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-link">Shop Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="featured-products">
+    <div class="container">
+        <div class="section-header">
+            <h2>Featured Products</h2>
+            <p>Our top picks for this season</p>
+        </div>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-badge">-20%</div>
+                <div class="product-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\products\shoe-1.jpg" alt="Pro Running Shoes" class="product-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder product-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>Pro Running Shoes X1</p>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="1"><i class="fas fa-cart-plus"></i></button>
+                        <button class="add-wishlist" data-id="1"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3><a href="D:\boot\sports-shop-template\template\pages\product-detail.html?id=1">Pro Running Shoes X1</a></h3>
+                    <div class="product-category">Running Shoes</div>
+                    <div class="price">
+                        <span class="old-price">$159.99</span>
+                        <span class="current-price">$127.99</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span>(48 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\products\tshirt-1.jpg" alt="Performance T-Shirt" class="product-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder product-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>Performance T-Shirt</p>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="2"><i class="fas fa-cart-plus"></i></button>
+                        <button class="add-wishlist" data-id="2"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3><a href="D:\boot\sports-shop-template\template\pages\product-detail.html?id=2">Performance T-Shirt</a></h3>
+                    <div class="product-category">Activewear</div>
+                    <div class="price">
+                        <span class="current-price">$49.99</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        <span>(124 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-badge">New</div>
+                <div class="product-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\products\watch-1.jpg" alt="Smart Fitness Watch" class="product-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder product-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>Smart Fitness Watch</p>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="3"><i class="fas fa-cart-plus"></i></button>
+                        <button class="add-wishlist" data-id="3"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3><a href="D:\boot\sports-shop-template\template\pages\product-detail.html?id=3">Smart Fitness Watch</a></h3>
+                    <div class="product-category">Accessories</div>
+                    <div class="price">
+                        <span class="current-price">$199.99</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(89 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\products\yoga-mat.jpg" alt="Yoga Mat" class="product-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder product-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>Yoga Mat Premium</p>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="4"><i class="fas fa-cart-plus"></i></button>
+                        <button class="add-wishlist" data-id="4"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3><a href="D:\boot\sports-shop-template\template\pages\product-detail.html?id=4">Yoga Mat Premium</a></h3>
+                    <div class="product-category">Fitness</div>
+                    <div class="price">
+                        <span class="current-price">$79.99</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span>(256 reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-footer">
+            <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-secondary">View All Products <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+
+<section class="banner-section">
+    <div class="container">
+        <div class="banner-wrapper">
+            <img src="D:\boot\sports-shop-template\documentation\assets\images\banners\summer-sale.jpg" alt="Summer Sale" class="banner-img" style="display: none;" onerror="this.style.display='none'">
+            <div class="image-placeholder banner-bg">
+                <div class="placeholder-content">
+                    <i class="fas fa-image fa-3x"></i>
+                    <p>Banner Placeholder</p>
+                </div>
+            </div>
+            <div style="position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; z-index: 10;">
+                <a href="D:\boot\sports-shop-template\template\pages\shop.html" class="btn-primary" style="display: inline-block;">Shop Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+        </div>
+    </div>
+</section>
+
+
+<section class="latest-blog">
+    <div class="container">
+        <div class="section-header">
+            <h2>Latest from Blog</h2>
+            <p>Tips, guides, and news from our experts</p>
+        </div>
+        
+        <div class="blog-grid">
+            <!-- مقاله 1 - Running Tips (id=1) -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\blog\running-tips.jpg" alt="Running Tips" class="blog-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder blog-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>Running Tips</p>
+                        </div>
+                    </div>
+                    <div class="blog-date">Jan 15, 2025</div>
+                </div>
+                <div class="blog-content">
+                    <h3><a href="D:\boot\sports-shop-template\template\pages\single-post.html?id=1">10 Tips for Better Running Form</a></h3>
+                    <p>Improve your performance and prevent injuries with these expert tips...</p>
+                    <a href="D:\boot\sports-shop-template\template\pages\single-post.html?id=1" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- مقاله 2 - Home Gym (id=2) -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\blog\home-gym.jpg" alt="Home Gym" class="blog-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder blog-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>Home Gym</p>
+                        </div>
+                    </div>
+                    <div class="blog-date">Jan 10, 2025</div>
+                </div>
+                <div class="blog-content">
+                    <h3><a href="D:\boot\sports-shop-template\template\pages\single-post.html?id=2">Best Gym Equipment for Home</a></h3>
+                    <p>Build your perfect home gym with our top 10 equipment recommendations...</p>
+                    <a href="D:\boot\sports-shop-template\template\pages\single-post.html?id=2" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- مقاله 3 - Nutrition (id=3) -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="D:\boot\sports-shop-template\documentation\assets\images\blog\nutrition.jpg" alt="Nutrition" class="blog-img" style="display: none;" onerror="this.style.display='none'">
+                    <div class="image-placeholder blog-bg">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image fa-2x"></i>
+                            <p>Nutrition Guide</p>
+                        </div>
+                    </div>
+                    <div class="blog-date">Jan 5, 2025</div>
+                </div>
+                <div class="blog-content">
+                    <h3><a href="D:\boot\sports-shop-template\template\pages\single-post.html?id=3">Nutrition Guide for Athletes</a></h3>
+                    <p>What to eat before and after training for optimal performance...</p>
+                    <a href="D:\boot\sports-shop-template\template\pages\single-post.html?id=3" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="newsletter">
+    <div class="container">
+        <div class="newsletter-wrapper">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest updates on new products and exclusive offers</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <div class="form-group">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About Us</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\account.html">Account</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 SportPro. All rights reserved. | Designed for professional use</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-amex"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+</body>
+</html>

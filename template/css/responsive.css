@@ -1,0 +1,179 @@
+/* ============================================ */
+/* RESPONSIVE.CSS - MOBILE & TABLET STYLES      */
+/* ============================================ */
+/* برنامه‌نویس: این فایل برای تمام صفحات کاربرد دارد */
+/* ============================================ */
+
+/* ===== TABLET (768px - 1024px) ===== */
+@media (max-width: 1024px) {
+    :root {
+        --font-size-4xl: 2rem;
+        --font-size-3xl: 1.75rem;
+        --spacing-4xl: 4rem;
+    }
+    
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    .desktop-nav {
+        display: none;
+    }
+    
+    .menu-btn {
+        display: block;
+    }
+}
+
+/* ===== MOBILE (480px - 768px) ===== */
+@media (max-width: 768px) {
+    :root {
+        --font-size-4xl: 1.75rem;
+        --font-size-3xl: 1.5rem;
+        --spacing-4xl: 3rem;
+        --spacing-3xl: 2rem;
+    }
+    
+    .header-wrapper {
+        gap: var(--spacing-md);
+    }
+    
+    .logo h2 {
+        font-size: 1.25rem;
+    }
+    
+    .hero {
+        min-height: 500px;
+        margin-top: 70px;
+    }
+    
+    .slide-content {
+        padding: var(--spacing-lg);
+        text-align: center;
+        align-items: center;
+    }
+    
+    .slide-text {
+        font-size: var(--font-size-base);
+    }
+    
+    .slider-prev,
+    .slider-next {
+        display: none;
+    }
+    
+    .features-grid,
+    .categories-grid,
+    .products-grid,
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .banner-content h2 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .banner-content p {
+        font-size: var(--font-size-sm);
+    }
+    
+    .banner-wrapper .image-placeholder {
+        height: 300px;
+    }
+    
+    .newsletter-form .form-group {
+        flex-direction: column;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: var(--spacing-xl);
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .contact-info li {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .sidebar {
+        width: 85%;
+        right: -85%;
+    }
+}
+
+/* ===== SMALL MOBILE (320px - 480px) ===== */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .product-image .image-placeholder {
+        height: 250px;
+    }
+    
+    .blog-image .image-placeholder {
+        height: 200px;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 8px 20px;
+        font-size: var(--font-size-sm);
+    }
+    
+    .product-actions button {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .search-container input {
+        font-size: 1rem;
+    }
+}
+
+/* ===== LARGE DESKTOP (1400px+) ===== */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ===== پرینت ===== */
+@media print {
+    .main-header,
+    .hero,
+    .newsletter,
+    .footer,
+    .sidebar,
+    .slider-prev,
+    .slider-next {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}

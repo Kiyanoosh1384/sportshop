@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Contact Us | SportPro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\components.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    
+    <style>
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 60px 0 40px;
+            background: linear-gradient(135deg, rgba(10,25,47,0.9) 0%, rgba(10,25,47,0.95) 100%);
+            border-radius: var(--radius-lg);
+        }
+        .contact-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        .contact-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+       
+        .contact-info-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            background: rgba(100,255,218,0.1);
+        }
+        .info-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(100,255,218,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .info-icon i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .info-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+        .info-card a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+        .info-card a:hover {
+            color: var(--secondary);
+        }
+        
+       
+        .contact-form-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        .form-container {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+        }
+        .form-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .form-container > p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(100,255,218,0.2);
+            border-radius: var(--radius-md);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            transition: var(--transition-normal);
+        }
+       
+        .form-group select option {
+            background: var(--primary-dark);
+            color: var(--text-light);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(100,255,218,0.05);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .submit-btn {
+            background: var(--secondary);
+            color: var(--primary-dark);
+            border: none;
+            padding: 14px 30px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            width: 100%;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        
+        .map-container {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 100%;
+            min-height: 500px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            border: none;
+        }
+        
+       
+        .hours-section {
+            margin-bottom: 60px;
+        }
+        .hours-wrapper {
+            background: linear-gradient(135deg, rgba(100,255,218,0.05) 0%, rgba(100,255,218,0.02) 100%);
+            border-radius: var(--radius-lg);
+            padding: 50px 40px;
+            text-align: center;
+            border: 1px solid rgba(100,255,218,0.1);
+        }
+        .hours-wrapper h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .hours-wrapper > p {
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .hour-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            transition: var(--transition-normal);
+            border: 1px solid rgba(100,255,218,0.05);
+        }
+        .hour-card:hover {
+            transform: translateY(-3px);
+            background: rgba(100,255,218,0.05);
+            border-color: rgba(100,255,218,0.2);
+        }
+        .hour-day {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+        .hour-time {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .hour-closed {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+        
+        
+        .faq-section {
+            margin-bottom: 60px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .faq-item {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            transition: var(--transition-normal);
+        }
+        .faq-item:hover {
+            background: rgba(100,255,218,0.05);
+        }
+        .faq-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        .faq-item p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-info-section { grid-template-columns: repeat(2, 1fr); }
+            .contact-form-section { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-info-section { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .hours-grid { grid-template-columns: 1fr; }
+            .hours-wrapper { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header"><h3>Menu</h3><button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button></div>
+    <nav class="sidebar-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html" class="active">Contact</a></li></ul></nav>
+    <div class="sidebar-contact"><h4>Contact Us</h4><p><i class="fas fa-phone"></i> 09103203789</p><p><i class="fas fa-envelope"></i> info@sportpro.com</p></div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo"><a href="index.html"><h2>Sport<span>Pro</span></h2></a></div>
+            <nav class="desktop-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html" class="active">Contact</a></li></ul></nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button id="openSidebar" class="icon-btn menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="searchModal" class="search-modal"><div class="search-modal-content"><button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button><div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" placeholder="Search sports..." id="searchInput"></div><div class="search-results" id="searchResults"></div></div></div>
+
+<main style="margin-top: 100px;">
+    <div class="container">
+        <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>We're here to help! Get in touch with us anytime.</p>
+        </div>
+        
+        <div class="contact-info-section">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                <h3>Phone Number</h3>
+                <p><a href="tel:+1234567890">+1 234 567</a></p>
+                <p><a href="tel:+989103203789">+98 910 320 3789</a></p>
+                <small style="color: var(--text-gray);">Mon-Fri, 9AM-6PM</small>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                <h3>Email Address</h3>
+                <p><a href="mailto:kiyanoosh13842005@gmail.com">kiyanoosh13842005@gmail.com</a></p>
+                <p><a href="mailto:support@sportpro.com">support@sportpro.com</a></p>
+                <small style="color: var(--text-gray);">7/25 online support</small>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Office Location</h3>
+                <p>123 Sports Avenue</p>
+                <p>Iran, Khuzestan, Ahvaz</p>
+                <small style="color: var(--text-gray);">Visit us by appointment</small>
+            </div>
+        </div>
+        
+       
+        <div class="contact-form-section">
+            <div class="form-container">
+                <h2>Send Us a Message</h2>
+                <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" id="firstName" placeholder="Kiyanoosh">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" id="lastName" placeholder="Shafiei">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="kiyanoosh13842005@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select id="subject">
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="product">Product Question</option>
+                            <option value="order">Order Status</option>
+                            <option value="returns">Returns & Refunds</option>
+                            <option value="partnership">Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea id="message" rows="5" placeholder="Tell us how we can help..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109150.65996616323!2d48.612934569484!3d31.31847348922087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fc73c2f0ee19a0d%3A0xb9275cc67f7d3f6e!2sAhvaz%2C%20Khuzestan%20Province%2C%20Iran!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+        
+
+        <div class="hours-section">
+            <div class="hours-wrapper">
+                <h2>Business Hours</h2>
+                <p>We're available during these hours to assist you</p>
+                <div class="hours-grid">
+                    <div class="hour-card">
+                        <span class="hour-day">Monday - Friday</span>
+                        <span class="hour-time">9:00 AM - 9:00 PM</span>
+                    </div>
+                    <div class="hour-card">
+                        <span class="hour-day">Saturday</span>
+                        <span class="hour-time">10:00 AM - 8:00 PM</span>
+                    </div>
+                    <div class="hour-card">
+                        <span class="hour-day">Sunday</span>
+                        <span class="hour-time">12:00 PM - 6:00 PM</span>
+                    </div>
+                    <div class="hour-card">
+                        <span class="hour-day">Holidays</span>
+                        <span class="hour-closed">Closed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="faq-section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>How long does shipping take?</h4>
+                    <p>Standard shipping takes 3-5 business days. Express shipping takes 1-2 business days. International shipping times vary by location.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What is your return policy?</h4>
+                    <p>We offer 30-day easy returns for unused items in original packaging. Contact our support team to initiate a return.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you ship internationally?</h4>
+                    <p>Yes, we ship worldwide! Shipping costs and delivery times vary by destination. Free shipping on orders over $100.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How can I track my order?</h4>
+                    <p>Once your order ships, you'll receive a tracking number via email. You can also track your order in your account dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\home.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About US</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\account.html">Account</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p><div class="payment-methods"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-amex"></i></div></div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+
+<script>
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName')?.value.trim();
+            const lastName = document.getElementById('lastName')?.value.trim();
+            const email = document.getElementById('email')?.value.trim();
+            const subject = document.getElementById('subject')?.value;
+            const message = document.getElementById('message')?.value.trim();
+            
+            if (!firstName || !lastName || !email || !subject || !message) {
+                showNotification('Please fill in all fields', true);
+                return;
+            }
+            
+            if (!email.includes('@')) {
+                showNotification('Please enter a valid email address', true);
+                return;
+            }
+            
+            showNotification('Message sent successfully! We\'ll get back to you soon.');
+            contactForm.reset();
+        });
+    }
+    
+    function showNotification(msg, isError = false) {
+        const n = document.createElement('div');
+        n.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${msg}`;
+        n.style.cssText = `position:fixed;bottom:20px;right:20px;background:${isError ? '#EF4444' : '#10B981'};color:white;padding:12px 24px;border-radius:8px;z-index:10000;animation:slideInRight 0.3s ease;`;
+        document.body.appendChild(n);
+        setTimeout(() => n.remove(), 3000);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>About Us | SportPro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\components.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    
+    <style>
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 60px 0 40px;
+            background: linear-gradient(135deg, rgba(10,25,47,0.9) 0%, rgba(10,25,47,0.95) 100%);
+            border-radius: var(--radius-lg);
+        }
+        .about-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        .about-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        
+        .intro-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+            align-items: center;
+        }
+        .intro-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .intro-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .intro-image {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .intro-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .intro-image .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
+        }
+        
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 40px 20px;
+            transition: var(--transition-normal);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(100,255,218,0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+       
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        .mission-card, .vision-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-5px);
+            background: rgba(100,255,218,0.05);
+        }
+        .mission-card i, .vision-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        .mission-card h3, .vision-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .mission-card p, .vision-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+       
+        .values-section {
+            margin-bottom: 80px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .value-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+        .value-card:hover {
+            transform: translateY(-5px);
+            background: rgba(100,255,218,0.1);
+        }
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(100,255,218,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .value-icon i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        .value-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .value-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+       
+        .team-section {
+            margin-bottom: 80px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .team-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition-normal);
+            text-align: center;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            background: rgba(100,255,218,0.1);
+        }
+        .team-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .team-image .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
+        }
+        .team-image i {
+            font-size: 4rem;
+            color: var(--text-gray);
+            opacity: 0.5;
+        }
+        .team-info {
+            padding: 20px;
+        }
+        .team-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .team-info p {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        .team-info .team-bio {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+        
+        
+        .cta-section {
+            background: linear-gradient(135deg, rgba(100,255,218,0.1) 0%, rgba(100,255,218,0.05) 100%);
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+        }
+        
+        @media (max-width: 992px) {
+            .intro-section { grid-template-columns: 1fr; gap: 30px; }
+            .stats-section { grid-template-columns: repeat(2, 1fr); }
+            .mission-vision { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 576px) {
+            .stats-section { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .about-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header"><h3>Menu</h3><button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button></div>
+    <nav class="sidebar-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="sidebar-contact"><h4>Contact Us</h4><p><i class="fas fa-phone"></i> 09103203789</p><p><i class="fas fa-envelope"></i> info@sportpro.com</p></div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo"><a href="index.html"><h2>Sport<span>Pro</span></h2></a></div>
+            <nav class="desktop-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html" class="active">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button id="openSidebar" class="icon-btn menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="searchModal" class="search-modal"><div class="search-modal-content"><button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button><div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" placeholder="Search sports..." id="searchInput"></div><div class="search-results" id="searchResults"></div></div></div>
+
+<main style="margin-top: 100px;">
+    <div class="container">
+        <div class="about-header">
+            <h1>About SportPro</h1>
+            <p>Your trusted partner for premium sports equipment since 2020</p>
+        </div>
+        
+   
+        <div class="intro-section">
+            <div class="intro-content">
+                <h2>Who We Are</h2>
+                <p>SportPro is a leading provider of high-quality sports equipment and apparel, dedicated to helping athletes of all levels achieve their best performance. Founded in 2020, we've grown from a small local shop to a global brand trusted by thousands of customers worldwide.</p>
+                <p>Our mission is to make premium sports gear accessible to everyone, from beginners to professionals. We carefully select every product in our collection, ensuring only the highest quality materials and craftsmanship.</p>
+                <p>Whether you're a weekend warrior or a competitive athlete, SportPro has everything you need to elevate your game. Join our community today and experience the difference.</p>
+            </div>
+            <div class="intro-image">
+                <img src="D:\boot\sports-shop-template\documentation\assets\images\about\team-photo.jpg" alt="Our Team" class="about-img" style="display: none;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="image-placeholder">
+                    <div class="placeholder-content">
+                        <i class="fas fa-image fa-3x"></i>
+                        <p>Team Photo<br><small>Replace with your image (800x600)</small></p>
+                        <small style="font-size: 10px;">📁 /assets/images/about/team-photo.jpg</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years of Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Products Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">78</div>
+                <div class="stat-label">Sports Covered</div>
+            </div>
+        </div>
+        
+     
+        <div class="mission-vision">
+            <div class="mission-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Our Mission</h3>
+                <p>To empower athletes worldwide by providing premium quality sports equipment that enhances performance, ensures safety, and inspires confidence in every game.</p>
+            </div>
+            <div class="vision-card">
+                <i class="fas fa-eye"></i>
+                <h3>Our Vision</h3>
+                <p>To become the most trusted and accessible sports equipment brand globally, fostering a community where every athlete can pursue their passion without limits.</p>
+            </div>
+        </div>
+        
+     
+        <div class="values-section">
+            <h2 class="section-title">Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-medal"></i></div>
+                    <h4>Quality First</h4>
+                    <p>We never compromise on quality. Every product is carefully selected and tested to meet the highest standards.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-users"></i></div>
+                    <h4>Customer Centric</h4>
+                    <p>Our customers are at the heart of everything we do. We listen, respond, and constantly improve.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-leaf"></i></div>
+                    <h4>Sustainability</h4>
+                    <p>We're committed to eco-friendly practices and sustainable sourcing for a better future.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h4>Innovation</h4>
+                    <p>We embrace new technologies and trends to bring you the best products on the market.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                    <h4>Integrity</h4>
+                    <p>We operate with honesty, transparency, and respect in all our business relationships.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-globe"></i></div>
+                    <h4>Global Community</h4>
+                    <p>We believe sports unite people across cultures and borders.</p>
+                </div>
+            </div>
+        </div>
+        
+      
+        <div class="team-section">
+            <h2 class="section-title">Meet Our Leadership Team</h2>
+            <div class="team-grid">
+               
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="D:\boot\sports-shop-template\documentation\assets\images\team\member-1.jpg" alt="Kiyanoosh Shafiei" class="team-img" style="display: none;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="image-placeholder">
+                            <div class="placeholder-content">
+                                <i class="fas fa-user-circle fa-3x"></i>
+                                <p>Kiyanoosh Shafiei<br><small>CEO & Founder</small></p>
+                                <small style="font-size: 10px;">📁 /assets/images/team/member-1.jpg</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Kiyanoosh Shafiei</h4>
+                        <p>CEO & Founder</p>
+                        <div class="team-bio">Former professional athlete with 15+ years of experience in sports retail.</div>
+                    </div>
+                </div>
+                
+              
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="D:\boot\sports-shop-template\documentation\assets\images\team\member-2.jpg" alt="Alireza" class="team-img" style="display: none;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="image-placeholder">
+                            <div class="placeholder-content">
+                                <i class="fas fa-user-circle fa-3x"></i>
+                                <p>Alireza<br><small>Head of Product</small></p>
+                                <small style="font-size: 10px;">📁 /assets/images/team/member-2.jpg</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Alireza</h4>
+                        <p>Head of Product</p>
+                        <div class="team-bio">Product specialist ensuring only the best quality gear reaches our customers.</div>
+                    </div>
+                </div>
+                
+                
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="D:\boot\sports-shop-template\documentation\assets\images\team\member-3.jpg" alt="Mohammad" class="team-img" style="display: none;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="image-placeholder">
+                            <div class="placeholder-content">
+                                <i class="fas fa-user-circle fa-3x"></i>
+                                <p>Mohammad<br><small>Operations Director</small></p>
+                                <small style="font-size: 10px;">📁 /assets/images/team/member-3.jpg</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Mohammad</h4>
+                        <p>Operations Director</p>
+                        <div class="team-bio">Streamlining logistics for fast and reliable worldwide delivery.</div>
+                    </div>
+                </div>
+                
+         
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="D:\boot\sports-shop-template\documentation\assets\images\team\member-4.jpg" alt="Nima" class="team-img" style="display: none;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="image-placeholder">
+                            <div class="placeholder-content">
+                                <i class="fas fa-user-circle fa-3x"></i>
+                                <p>Nima<br><small>Customer Experience</small></p>
+                                <small style="font-size: 10px;">📁 /assets/images/team/member-4.jpg</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Nima</h4>
+                        <p>Customer Experience</p>
+                        <div class="team-bio">Dedicated to providing exceptional support to our global community.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="cta-section">
+            <h2>Ready to Elevate Your Game?</h2>
+            <p>Join thousands of satisfied athletes who trust SportPro for their sports equipment needs.</p>
+            <a href="shop.html" class="btn-primary">Shop Now </a>
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\index.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\account.html">Account</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p><div class="payment-methods"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-amex"></i></div></div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+</body>
+</html>

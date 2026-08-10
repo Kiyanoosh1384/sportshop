@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>My Account | SportPro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\components.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    
+    <style>
+        .account-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0 20px;
+        }
+        .account-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .account-header p {
+            color: var(--text-gray);
+        }
+        
+        .account-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        /* سایدبار حساب */
+        .account-sidebar {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .account-profile {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(100,255,218,0.1);
+            margin-bottom: 20px;
+        }
+        .account-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(100,255,218,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        .account-avatar i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        .account-profile h3 {
+            font-size: 1.1rem;
+        }
+        .account-profile p {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+        }
+        
+        .account-nav {
+            list-style: none;
+        }
+        .account-nav li {
+            margin-bottom: 5px;
+        }
+        .account-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: var(--text-gray);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+        }
+        .account-nav a:hover {
+            background: rgba(100,255,218,0.05);
+            color: var(--text-light);
+        }
+        .account-nav a.active {
+            background: rgba(100,255,218,0.1);
+            color: var(--secondary);
+        }
+        .account-nav a i {
+            width: 20px;
+            color: var(--secondary);
+        }
+        
+        /* محتوای اصلی */
+        .account-content {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+        }
+        .account-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        .account-content .subtitle {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+        .info-card h4 {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .info-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        .order-history {
+            margin-top: 30px;
+        }
+        .order-history h3 {
+            margin-bottom: 20px;
+        }
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-table th {
+            text-align: left;
+            padding: 12px 15px;
+            background: rgba(100,255,218,0.05);
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .order-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(100,255,218,0.1);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        .order-status {
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .order-status.delivered { background: rgba(16,185,129,0.2); color: #10B981; }
+        .order-status.processing { background: rgba(59,130,246,0.2); color: #3B82F6; }
+        .order-status.shipped { background: rgba(245,158,11,0.2); color: #F59E0B; }
+        .order-status.cancelled { background: rgba(239,68,68,0.2); color: #EF4444; }
+        
+        @media (max-width: 992px) {
+            .account-layout { grid-template-columns: 1fr; }
+            .account-sidebar { position: static; }
+        }
+        @media (max-width: 576px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .order-table { overflow-x: auto; display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header"><h3>Menu</h3><button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button></div>
+    <nav class="sidebar-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="sidebar-contact"><h4>Contact Us</h4><p><i class="fas fa-phone"></i> 09103203789</p><p><i class="fas fa-envelope"></i> info@sportpro.com</p></div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo"><a href="index.html"><h2>Sport<span>Pro</span></h2></a></div>
+            <nav class="desktop-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button id="openSidebar" class="icon-btn menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="searchModal" class="search-modal"><div class="search-modal-content"><button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button><div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" placeholder="Search products..." id="searchInput"></div><div class="search-results" id="searchResults"></div></div></div>
+
+<main style="margin-top: 100px;">
+    <div class="container">
+        <div class="account-header">
+            <h1>My Account</h1>
+            <p>Manage your profile, orders, and preferences</p>
+        </div>
+        
+        <div class="account-layout">
+            <aside class="account-sidebar">
+                <div class="account-profile">
+                    <div class="account-avatar"><i class="fas fa-user"></i></div>
+                    <h3>Kiyanoosh</h3>
+                    <p>kiyanoosh13842005@gmail.com</p>
+                </div>
+                <ul class="account-nav">
+                    <li><a href="account.html" class="active"><i class="fas fa-user"></i> Dashboard</a></li>
+                    <li><a href="cart.html"><i class="fas fa-box"></i> Orders</a></li>
+                    <li><a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </aside>
+            
+            <div class="account-content">
+                <h2>Dashboard</h2>
+                <p class="subtitle">Welcome back, Kiyanoosh! Here's an overview of your account.</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>Total Orders</h4>
+                        <p>12</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Total Spent</h4>
+                        <p>$1,847.50</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Wishlist Items</h4>
+                        <p>5</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Member Since</h4>
+                        <p>January 2024</p>
+                    </div>
+                </div>
+                
+                <div class="order-history">
+                    <h3>Recent Orders</h3>
+                    <table class="order-table">
+                        <thead><tr><th>Order ID</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>#ORD-2025-001</td><td>Jan 15, 2025</td><td>3 items</td><td>$247.50</td><td><span class="order-status delivered">Delivered</span></td></tr>
+                            <tr><td>#ORD-2025-002</td><td>Jan 10, 2025</td><td>2 items</td><td>$129.99</td><td><span class="order-status shipped">Shipped</span></td></tr>
+                            <tr><td>#ORD-2024-048</td><td>Dec 28, 2024</td><td>1 item</td><td>$89.99</td><td><span class="order-status processing">Processing</span></td></tr>
+                            <tr><td>#ORD-2024-047</td><td>Dec 20, 2024</td><td>4 items</td><td>$349.99</td><td><span class="order-status delivered">Delivered</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\home.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About US</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p><div class="payment-methods"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-amex"></i></div></div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+</body>
+</html>

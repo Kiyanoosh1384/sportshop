@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Single Post | SportPro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\components.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+        .back-link:hover {
+            margin-right: 5px;
+            color: var(--accent);
+        }
+        
+        .post-header {
+            margin-bottom: 40px;
+        }
+        .post-category {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            padding: 5px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .post-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        .post-meta {
+            display: flex;
+            gap: 25px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        .post-meta i {
+            color: var(--secondary);
+            margin-right: 6px;
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 450px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 40px;
+            background: rgba(255,255,255,0.03);
+        }
+        .post-image .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .post-content {
+            max-width: 850px;
+            margin: 0 auto 50px;
+        }
+        .post-content p {
+            color: var(--text-gray);
+            line-height: 1.9;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .post-content h3 {
+            color: var(--text-white);
+            margin: 30px 0 15px;
+            font-size: 1.5rem;
+        }
+        .post-content ul {
+            margin: 20px 0 20px 25px;
+        }
+        .post-content ul li {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        .post-content blockquote {
+            background: rgba(100,255,218,0.05);
+            border-left: 4px solid var(--secondary);
+            padding: 20px 30px;
+            margin: 30px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+        .post-content blockquote p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: var(--text-light);
+        }
+        
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(100,255,218,0.1);
+            border-bottom: 1px solid rgba(100,255,218,0.1);
+            margin: 30px 0 50px;
+            flex-wrap: wrap;
+        }
+        .share-section span {
+            color: var(--text-gray);
+        }
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+            border: none;
+            cursor: pointer;
+        }
+        .share-btn.facebook { background: #1877f2; color: white; }
+        .share-btn.twitter { background: #000000; color: white; }
+        .share-btn.instagram { background: #e4405f; color: white; }
+        .share-btn.linkedin { background: #0a66c2; color: white; }
+        .share-btn:hover { transform: translateY(-3px); }
+        
+        .comments-section {
+            margin: 50px 0;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .comments-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .comment-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(100,255,218,0.1);
+        }
+        .comment-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(100,255,218,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .comment-avatar i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        .comment-content h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        .comment-content .comment-date {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+        }
+        .comment-content p {
+            color: var(--text-gray);
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+        
+        .comment-form {
+            max-width: 850px;
+            margin: 0 auto 60px;
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+        }
+        .comment-form h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .comment-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .comment-form .form-group {
+            margin-bottom: 20px;
+        }
+        .comment-form .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .comment-form .form-group input,
+        .comment-form .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(100,255,218,0.2);
+            border-radius: var(--radius-md);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+        }
+        .comment-form .form-group input:focus,
+        .comment-form .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        .submit-comment {
+            background: var(--secondary);
+            color: var(--primary-dark);
+            border: none;
+            padding: 12px 30px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+        .submit-comment:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .related-posts {
+            margin: 60px 0 40px;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .related-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition-normal);
+            text-decoration: none;
+        }
+        .related-card:hover {
+            transform: translateY(-5px);
+            background: rgba(100,255,218,0.1);
+        }
+        .related-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        .related-image .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .related-info {
+            padding: 18px;
+        }
+        .related-info h4 {
+            color: var(--text-white);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .related-info .related-date {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+        }
+        .related-info .read-more-small {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 992px) {
+            .post-image { height: 300px; }
+            .related-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .post-title { font-size: 1.8rem; }
+            .post-meta { gap: 15px; font-size: 0.8rem; }
+            .post-image { height: 220px; }
+            .comment-form .form-row { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header"><h3>Menu</h3><button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button></div>
+    <nav class="sidebar-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="sidebar-contact"><h4>Contact Us</h4><p><i class="fas fa-phone"></i> 09103203789</p><p><i class="fas fa-envelope"></i> info@sportpro.com</p></div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo"><a href="index.html"><h2>Sport<span>Pro</span></h2></a></div>
+            <nav class="desktop-nav"><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Sports</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn"><i class="fas fa-search"></i></a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;"><i class="fas fa-heart"></i><span class="wishlist-count">0</span></a>
+                <a href="cart.html" class="icon-btn" style="position: relative;"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                <button id="openSidebar" class="icon-btn menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="searchModal" class="search-modal"><div class="search-modal-content"><button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button><div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" placeholder="Search products..." id="searchInput"></div><div class="search-results" id="searchResults"></div></div></div>
+
+<main style="margin-top: 100px;">
+    <div class="container">
+        <a href="blog.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+        
+        <div id="dynamicContent">Loading post...</div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\home.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About US</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\shop.html">Shop</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\account.html">Account</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p><div class="payment-methods"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-amex"></i></div></div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = parseInt(urlParams.get('id')) || 1;
+    
+    // ===== دیتابیس کامل 6 مقاله =====
+    const postsDatabase = {
+        1: {
+            id: 1,
+            title: "10 Tips for Better Running Form",
+            category: "Running",
+            date: "January 15, 2025",
+            author: "Kiyanoosh Shafiei",
+            readTime: "5 min read",
+            views: 1245,
+            image: "running-tips",
+            content: `
+                <p>Running is one of the most accessible and effective forms of exercise, but proper form is essential to maximize performance and prevent injuries. Whether you're a beginner or a seasoned marathoner, these 10 tips will help you improve your running form and efficiency.</p>
+                
+                <h3>1. Maintain an upright posture</h3>
+                <p>Keep your head up, back straight, and shoulders relaxed. Avoid leaning forward or backward, which can cause unnecessary strain on your back and hips.</p>
+                
+                <h3>2. Look ahead, not down</h3>
+                <p>Your gaze should be fixed about 10-20 meters ahead. Looking down at your feet can cause your head to drop, leading to poor posture and reduced breathing efficiency.</p>
+                
+                <h3>3. Relax your shoulders and arms</h3>
+                <p>Keep your shoulders relaxed and your arms bent at a 90-degree angle. Your arms should swing forward and backward in sync with your legs, not across your body.</p>
+                
+                <h3>4. Practice cadence drills</h3>
+                <p>Cadence refers to the number of steps you take per minute. Aim for a cadence of 170-180 steps per minute to reduce impact and improve efficiency.</p>
+                
+                <h3>5. Strengthen your core muscles</h3>
+                <p>A strong core stabilizes your body during running and helps maintain good posture. Include planks and other core exercises in your training routine.</p>
+                
+                <blockquote>
+                    <p>"Good running form isn't just about speed—it's about efficiency, injury prevention, and enjoying the run." — Kiyanoosh Shafiei</p>
+                </blockquote>
+                
+                <h3>6. Breathe deeply from your belly</h3>
+                <p>Practice diaphragmatic breathing to deliver more oxygen to your muscles. Breathe in through your nose and out through your mouth in a rhythmic pattern.</p>
+                
+                <h3>7. Warm up properly before each run</h3>
+                <p>Dynamic stretching and a light jog can prepare your body for the demands of running and reduce the risk of injury.</p>
+                
+                <h3>8. Cool down after each run</h3>
+                <p>Take 5-10 minutes to walk and stretch after each run to help your body recover and reduce muscle soreness.</p>
+                
+                <h3>9. Incorporate strength training</h3>
+                <p>Include strength training exercises such as lunges, squats, and calf raises to improve your running power and endurance.</p>
+                
+                <h3>10. Listen to your body</h3>
+                <p>Pay attention to any signs of pain or discomfort. Rest when needed and don't push through pain that could lead to injury.</p>
+            `,
+            comments: [
+                { name: "Sarah Miller", date: "January 16, 2025", text: "Great tips! The breathing technique really helped me improve my endurance." },
+                { name: "Michael Chen", date: "January 16, 2025", text: "I've been using these techniques for a week and my running has improved significantly. Thanks!" }
+            ]
+        },
+        2: {
+            id: 2,
+            title: "Best Gym Equipment for Home Workouts",
+            category: "Fitness",
+            date: "January 10, 2025",
+            author: "Alireza",
+            readTime: "7 min read",
+            views: 2341,
+            image: "home-gym",
+            content: `
+                <p>Building a home gym doesn't have to be expensive or complicated. With the right equipment, you can create an effective workout space that rivals any commercial gym. Here are our top 10 recommendations for home gym equipment.</p>
+                
+                <h3>1. Adjustable Dumbbells</h3>
+                <p>These space-saving weights can replace an entire rack of dumbbells, making them perfect for home use.</p>
+                
+                <h3>2. Resistance Bands</h3>
+                <p>Versatile and affordable, resistance bands are great for strength training, stretching, and rehabilitation exercises.</p>
+                
+                <h3>3. Yoga Mat</h3>
+                <p>A quality yoga mat is essential for floor exercises, stretching, and yoga practice at home.</p>
+                
+                <h3>4. Pull-Up Bar</h3>
+                <p>Install a pull-up bar in a doorway to perform upper body exercises like pull-ups, chin-ups, and hanging leg raises.</p>
+                
+                <h3>5. Kettlebell</h3>
+                <p>A kettlebell is incredibly versatile and can be used for swings, squats, presses, and more.</p>
+                
+                <blockquote>
+                    <p>"A well-equipped home gym can be more effective than a commercial gym because you can focus on your own pace and routine." — Alireza</p>
+                </blockquote>
+                
+                <h3>6. Jump Rope</h3>
+                <p>An excellent cardiovascular workout tool that takes up minimal space and costs very little.</p>
+                
+                <h3>7. Medicine Ball</h3>
+                <p>Great for core exercises, rotational movements, and plyometric training.</p>
+                
+                <h3>8. Foam Roller</h3>
+                <p>Essential for self-myofascial release and muscle recovery after workouts.</p>
+                
+                <h3>9. Weight Bench</h3>
+                <p>A sturdy weight bench allows you to perform a wide range of exercises with dumbbells and barbells.</p>
+                
+                <h3>10. Suspension Trainer</h3>
+                <p>Perfect for bodyweight exercises that challenge your stability and strength.</p>
+            `,
+            comments: [
+                { name: "Emily Rodriguez", date: "January 11, 2025", text: "Great recommendations! I've been using these equipment at home and it's transformed my fitness routine." }
+            ]
+        },
+        3: {
+            id: 3,
+            title: "Nutrition Guide for Athletes",
+            category: "Nutrition",
+            date: "January 5, 2025",
+            author: "Mohammad",
+            readTime: "8 min read",
+            views: 1876,
+            image: "nutrition",
+            content: `
+                <p>Proper nutrition is the foundation of athletic performance. What you eat before, during, and after training can significantly impact your energy levels, recovery, and overall results. This comprehensive guide will help you optimize your nutrition for peak performance.</p>
+                
+                <h3>Pre-Workout Nutrition</h3>
+                <p>Eat a balanced meal 2-3 hours before training, rich in complex carbohydrates and moderate in protein. Avoid heavy fats and excessive protein that can slow digestion.</p>
+                
+                <h3>During Workout</h3>
+                <p>Stay hydrated by drinking water regularly. For intense or long sessions (over 60 minutes), consider a sports drink to replenish electrolytes.</p>
+                
+                <h3>Post-Workout Recovery</h3>
+                <p>Consume a meal rich in protein and carbohydrates within 30-60 minutes after training to support muscle recovery and glycogen replenishment.</p>
+                
+                <h3>Key Nutrients for Athletes</h3>
+                <ul>
+                    <li><strong>Protein:</strong> Essential for muscle repair and growth. Sources: chicken, fish, eggs, beans, and whey protein.</li>
+                    <li><strong>Carbohydrates:</strong> The primary fuel for exercise. Sources: whole grains, fruits, vegetables, and legumes.</li>
+                    <li><strong>Fats:</strong> Important for hormonal health and sustained energy. Sources: avocados, nuts, olive oil, and fatty fish.</li>
+                    <li><strong>Hydration:</strong> Drink adequate water and electrolyte-rich fluids to maintain performance.</li>
+                </ul>
+                
+                <blockquote>
+                    <p>"Nutrition is not just about eating. It's about nourishing your body to perform at its best." — Mohammad</p>
+                </blockquote>
+            `,
+            comments: [
+                { name: "John Anderson", date: "January 6, 2025", text: "This is exactly what I needed! The tips on post-workout nutrition have made a huge difference in my recovery." },
+                { name: "Michael Chen", date: "January 6, 2025", text: "Great article! I've started implementing these nutrition strategies and my training has improved significantly." }
+            ]
+        },
+        4: {
+            id: 4,
+            title: "How to Choose the Right Running Shoes",
+            category: "Running",
+            date: "December 28, 2024",
+            author: "Reza",
+            readTime: "6 min read",
+            views: 987,
+            image: "running-shoes",
+            content: `
+                <p>Choosing the right running shoes is one of the most important decisions a runner can make. The right pair can prevent injuries, improve performance, and make every run more enjoyable. Here's what you need to know.</p>
+                
+                <h3>Know Your Foot Type</h3>
+                <p>Understanding your foot arch type (neutral, flat, or high arch) is the first step. Visit a specialty running store for a gait analysis to determine your specific needs.</p>
+                
+                <h3>Consider Your Running Surface</h3>
+                <p>Different shoes are designed for different surfaces. Road running shoes offer cushioning for hard surfaces, while trail running shoes provide more traction and protection for off-road terrain.</p>
+                
+                <h3>Fit Matters Most</h3>
+                <p>Your running shoes should fit comfortably from the first wear. There should be a thumb's width of space between your longest toe and the end of the shoe.</p>
+                
+                <blockquote>
+                    <p>"The right running shoes can make the difference between a great run and a painful one." — Reza</p>
+                </blockquote>
+            `,
+            comments: [
+                { name: "Sarah M.", date: "December 29, 2024", text: "This article helped me find my perfect running shoes! My runs have never been more comfortable." }
+            ]
+        },
+        5: {
+            id: 5,
+            title: "Recovery Techniques for Peak Performance",
+            category: "Fitness",
+            date: "December 20, 2024",
+            author: "Ali",
+            readTime: "4 min read",
+            views: 654,
+            image: "recovery",
+            content: `
+                <p>Recovery is just as important as training itself. Without proper recovery, your body can't adapt to the stress of training, leading to plateaus and potential injuries. Here are the best recovery techniques to help you perform at your peak.</p>
+                
+                <h3>Active Recovery</h3>
+                <p>Light movement like walking, swimming, or cycling on rest days helps promote blood flow and reduce muscle soreness.</p>
+                
+                <h3>Foam Rolling</h3>
+                <p>Self-myofascial release with a foam roller can help release tension in muscles and improve flexibility.</p>
+                
+                <h3>Stretching</h3>
+                <p>Incorporate static stretching after workouts to improve flexibility and reduce muscle tightness.</p>
+                
+                <h3>Sleep</h3>
+                <p>Aim for 7-9 hours of quality sleep per night to allow your body to repair and regenerate.</p>
+                
+                <h3>Hydration and Nutrition</h3>
+                <p>Proper hydration and nutrition support the recovery process. Consume protein and carbohydrates after training to replenish glycogen stores and repair muscle tissue.</p>
+                
+                <blockquote>
+                    <p>"Recovery is where the magic happens. Train smart, recover harder." — Ali</p>
+                </blockquote>
+            `,
+            comments: [
+                { name: "David L.", date: "December 21, 2024", text: "Foam rolling has been a game changer for my recovery! Thanks for the tips." }
+            ]
+        },
+        6: {
+            id: 6,
+            title: "Mental Preparation for Competition",
+            category: "Mindset",
+            date: "December 15, 2024",
+            author: "Hossien",
+            readTime: "5 min read",
+            views: 1123,
+            image: "mental",
+            content: `
+                <p>Physical preparation is only half the battle. Mental toughness and the right mindset can be the difference between winning and losing. Here are some strategies to prepare mentally for competition.</p>
+                
+                <h3>Visualization</h3>
+                <p>Visualize yourself performing at your best. Imagine the entire experience, from warming up to crossing the finish line.</p>
+                
+                <h3>Positive Self-Talk</h3>
+                <p>Replace negative thoughts with positive affirmations. Remind yourself of your strengths and past successes.</p>
+                
+                <h3>Focus on the Process</h3>
+                <p>Instead of worrying about the outcome, focus on the process and what you can control: your effort, attitude, and execution.</p>
+                
+                <h3>Breathing Techniques</h3>
+                <p>Deep breathing can help calm nerves and center your focus before competition.</p>
+                
+                <blockquote>
+                    <p>"The mind is the most powerful tool in sports. Train it like you train your body." — Hossien</p>
+                </blockquote>
+            `,
+            comments: [
+                { name: "Emily R.", date: "December 16, 2024", text: "Visualization has completely changed my performance. I feel so much more confident before competitions!" }
+            ]
+        }
+    };
+    
+    const post = postsDatabase[postId] || postsDatabase[1];
+    
+    function renderPage() {
+        const container = document.getElementById('dynamicContent');
+        
+        const fullStars = 5;
+        const starsHtml = '★'.repeat(fullStars);
+        
+        container.innerHTML = `
+            <div class="post-header">
+                <span class="post-category">${post.category}</span>
+                <h1 class="post-title">${post.title}</h1>
+                <div class="post-meta">
+                    <span><i class="fas fa-calendar-alt"></i> ${post.date}</span>
+                    <span><i class="fas fa-user"></i> ${post.author}</span>
+                    <span><i class="fas fa-clock"></i> ${post.readTime}</span>
+                    <span><i class="fas fa-eye"></i> ${post.views.toLocaleString()} views</span>
+                </div>
+            </div>
+            
+            <div class="post-image">
+                <div class="image-placeholder">
+                    <div class="placeholder-content">
+                        <i class="fas fa-image fa-3x"></i>
+                        <p>${post.image}.jpg</p>
+                        <small>📁 /assets/images/blog/</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-content">
+                ${post.content}
+            </div>
+            
+            <div class="share-section">
+                <span>Share:</span>
+                <button class="share-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                <button class="share-btn twitter"><i class="fab fa-twitter"></i></button>
+                <button class="share-btn instagram"><i class="fab fa-instagram"></i></button>
+                <button class="share-btn linkedin"><i class="fab fa-linkedin-in"></i></button>
+            </div>
+            
+            <div class="comments-section">
+                <h3>Comments (${post.comments.length})</h3>
+                ${post.comments.map(c => `
+                    <div class="comment-item">
+                        <div class="comment-avatar"><i class="fas fa-user"></i></div>
+                        <div class="comment-content">
+                            <h4>${c.name}</h4>
+                            <div class="comment-date">${c.date}</div>
+                            <p>${c.text}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <div class="comment-form">
+                <h4>Leave a Comment</h4>
+                <form id="commentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="commentName" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="commentEmail" placeholder="john@email.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Comment</label>
+                        <textarea id="commentMessage" rows="4" placeholder="Share your thoughts..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-comment">Post Comment <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+            
+            <div class="related-posts">
+                <h2 class="section-title">You May Also Like</h2>
+                <div class="related-grid" id="relatedGrid"></div>
+            </div>
+        `;
+        
+        // پست‌های مرتبط
+        const relatedGrid = document.getElementById('relatedGrid');
+        if (relatedGrid) {
+            const relatedPosts = Object.values(postsDatabase).filter(p => p.id !== post.id).slice(0, 3);
+            relatedGrid.innerHTML = relatedPosts.map(p => `
+                <a href="single-post.html?id=${p.id}" class="related-card">
+                    <div class="related-image">
+                        <div class="image-placeholder">
+                            <div class="placeholder-content">
+                                <i class="fas fa-image fa-2x"></i>
+                                <p>${p.title.substring(0, 20)}...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="related-info">
+                        <h4>${p.title}</h4>
+                        <div class="related-date">${p.date}</div>
+                        <div class="read-more-small">Read More <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </a>
+            `).join('');
+        }
+        
+        attachEvents();
+    }
+    
+    function attachEvents() {
+        const commentForm = document.getElementById('commentForm');
+        if (commentForm) {
+            commentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('commentName').value.trim();
+                const email = document.getElementById('commentEmail').value.trim();
+                const message = document.getElementById('commentMessage').value.trim();
+                
+                if (!name || !email || !message) {
+                    showNotification('Please fill in all fields', true);
+                    return;
+                }
+                
+                if (!email.includes('@')) {
+                    showNotification('Please enter a valid email address', true);
+                    return;
+                }
+                
+                showNotification('Comment posted successfully! It will appear after review.');
+                commentForm.reset();
+            });
+        }
+    }
+    
+    function showNotification(msg, isError = false) {
+        const n = document.createElement('div');
+        n.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${msg}`;
+        n.style.cssText = `position:fixed;bottom:20px;right:20px;background:${isError ? '#EF4444' : '#10B981'};color:white;padding:12px 24px;border-radius:8px;z-index:10000;animation:slideInRight 0.3s ease;`;
+        document.body.appendChild(n);
+        setTimeout(() => n.remove(), 3000);
+    }
+    
+    renderPage();
+</script>
+</body>
+</html>

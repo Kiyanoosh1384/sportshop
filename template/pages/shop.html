@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sports Categories | SportPro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\variables.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\main.css">
+    <link rel="stylesheet" href="D:\boot\sports-shop-template\template\css\responsive.css">
+    
+    <style>
+        .sports-page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0 20px;
+        }
+        .sports-page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .sports-page-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+        
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .sport-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .sport-card:hover {
+            transform: translateY(-10px);
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sport-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sport-image .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .sport-card:hover .sport-image .image-placeholder {
+            transform: scale(1.05);
+        }
+        
+        .sport-icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        
+        .sport-info {
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sport-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-white);
+        }
+        
+        .sport-info p {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .product-count {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.15);
+            padding: 6px 14px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: auto;
+            align-self: center;
+            color: #FFFFFF;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        
+        .product-count i {
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 1024px) {
+            .sports-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .sports-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .sports-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h3>Menu</h3>
+        <button id="closeSidebar" class="close-sidebar"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Sports</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="sidebar-contact">
+        <h4>Contact Us</h4>
+        <p><i class="fas fa-phone"></i> 09103203789</p>
+        <p><i class="fas fa-envelope"></i> info@sportpro.com</p>
+    </div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo">
+                <a href="index.html"><h2>Sport<span>Pro</span></h2></a>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html" class="active">Sports</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#" class="icon-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" style="position: relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button id="openSidebar" class="icon-btn menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="searchModal" class="search-modal">
+    <div class="search-modal-content">
+        <button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search sports..." id="searchInput">
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+
+
+<section class="sports-page">
+    <div class="container">
+        <div class="sports-page-header">
+            <h1>All Sports</h1>
+            <p>Choose your sport and discover the best equipment</p>
+        </div>
+        
+        <div class="sports-grid" id="sportsGrid">
+        </div>
+    </div>
+</section>
+
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sport<span>Pro</span></h3>
+                <p>Premium sports equipment and apparel for athletes of all levels.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\home.html">Home</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\about.html">About US</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\cart.html">Card</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\wishlist.html">Wishlist</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Other pages</h4>
+                <ul>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\blog.html">Blog</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\contact.html">Contact</a></li>
+                    <li><a href="D:\boot\sports-shop-template\template\pages\account.html">Account</a></li>
+
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> IRAN - KHOZESTAN - AHVAZ</li>
+                    <li><i class="fas fa-phone"></i> 0910 320 3789</li>
+                    <li><i class="fas fa-envelope"></i> kiyanoosh13842005@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SportPro. All rights reserved. | Professional HTML Template</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-amex"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="D:\boot\sports-shop-template\template\js\main.js"></script>
+<script src="D:\boot\sports-shop-template\template\js\cart.js"></script>
+
+<script>
+    
+    const sports = [
+        { id: 1, name: "⚽ Football", slug: "football", icon: "⚽", products: 24, desc: "Soccer balls, boots, kits & accessories" },
+        { id: 2, name: "🏀 Basketball", slug: "basketball", icon: "🏀", products: 18, desc: "Basketballs, shoes, jerseys & hoops" },
+        { id: 3, name: "🎾 Tennis", slug: "tennis", icon: "🎾", products: 22, desc: "Rackets, balls, shoes & bags" },
+        { id: 4, name: "🏐 Volleyball", slug: "volleyball", icon: "🏐", products: 15, desc: "Volleyballs, nets, knee pads & shoes" },
+        { id: 5, name: "🏓 Table Tennis", slug: "table-tennis", icon: "🏓", products: 20, desc: "Rackets, balls, tables & nets" },
+        { id: 6, name: "🏸 Badminton", slug: "badminton", icon: "🏸", products: 16, desc: "Rackets, shuttlecocks, nets & shoes" },
+        { id: 7, name: "⚾ Baseball", slug: "baseball", icon: "⚾", products: 19, desc: "Bats, balls, gloves & helmets" },
+        { id: 8, name: "🏈 American Football", slug: "american-football", icon: "🏈", products: 14, desc: "Football, helmets, pads & jerseys" },
+        { id: 9, name: "🏑 Field Hockey", slug: "field-hockey", icon: "🏑", products: 12, desc: "Sticks, balls, goals & protective gear" },
+        { id: 10, name: "🥍 Lacrosse", slug: "lacrosse", icon: "🥍", products: 11, desc: "Sticks, balls, helmets & gloves" },
+        { id: 11, name: "🤾 Handball", slug: "handball", icon: "🤾", products: 10, desc: "Handballs, shoes & jerseys" },
+        { id: 12, name: "🎱 Pool & Billiards", slug: "billiards", icon: "🎱", products: 25, desc: "Cues, balls, tables & chalk" },
+        { id: 13, name: "🎳 Bowling", slug: "bowling", icon: "🎳", products: 13, desc: "Bowling balls, shoes & bags" },
+        { id: 14, name: "⛳ Golf", slug: "golf", icon: "⛳", products: 30, desc: "Clubs, balls, bags & gloves" },
+        { id: 15, name: "🥏 Disc Golf", slug: "disc-golf", icon: "🥏", products: 9, desc: "Discs, baskets & bags" },
+        { id: 16, name: "🎾 Padel", slug: "padel", icon: "🎾", products: 17, desc: "Padel rackets, balls & bags" },
+        { id: 17, name: "🏸 Squash", slug: "squash", icon: "🏸", products: 14, desc: "Squash rackets, balls & goggles" },
+        { id: 18, name: "🎾 Racquetball", slug: "racquetball", icon: "🎾", products: 11, desc: "Racquetball rackets, balls & gloves" },
+        { id: 19, name: "🥋 Karate", slug: "karate", icon: "🥋", products: 28, desc: "Gis, belts, protective gear & bags" },
+        { id: 20, name: "🥊 Boxing", slug: "boxing", icon: "🥊", products: 32, desc: "Gloves, punching bags, hand wraps & headgear" },
+        { id: 21, name: "🥋 Taekwondo", slug: "taekwondo", icon: "🥋", products: 20, desc: "Uniforms, belts, chest protectors & headgear" },
+        { id: 22, name: "🤼‍♂️ Wrestling", slug: "wrestling", icon: "🤼", products: 18, desc: "Singlets, shoes, headgear & mats" },
+        { id: 23, name: "🥋 Judo", slug: "judo", icon: "🥋", products: 22, desc: "Judogis, belts, mats & bags" },
+        { id: 24, name: "🥋 Jiu-Jitsu", slug: "jiu-jitsu", icon: "🥋", products: 24, desc: "Gis, rash guards, belts & mats" },
+        { id: 25, name: "⚔️ Fencing", slug: "fencing", icon: "⚔️", products: 16, desc: "Swords, masks, jackets & gloves" },
+        { id: 26, name: "🥋 Kung Fu", slug: "kungfu", icon: "🥋", products: 15, desc: "Uniforms, shoes, weapons & bags" },
+        { id: 27, name: "🥊 Muay Thai", slug: "muay-thai", icon: "🥊", products: 26, desc: "Gloves, shin guards, shorts & pads" },
+        { id: 28, name: "🏊 Swimming", slug: "swimming", icon: "🏊", products: 35, desc: "Swimsuits, goggles, caps, fins & bags" },
+        { id: 29, name: "🤽 Water Polo", slug: "water-polo", icon: "🤽", products: 14, desc: "Balls, caps, swimsuits & goals" },
+        { id: 30, name: "🏄 Surfing", slug: "surfing", icon: "🏄", products: 28, desc: "Surfboards, leashes, wetsuits & wax" },
+        { id: 31, name: "🏄‍♂️ Bodyboarding", slug: "bodyboarding", icon: "🏄", products: 12, desc: "Boards, fins & leashes" },
+        { id: 32, name: "🛶 Kayaking", slug: "kayaking", icon: "🛶", products: 22, desc: "Kayaks, paddles, life vests & helmets" },
+        { id: 33, name: "🚣 Rowing", slug: "rowing", icon: "🚣", products: 18, desc: "Oars, rowing machines, seats & shoes" },
+        { id: 34, name: "🤿 Scuba Diving", slug: "diving", icon: "🤿", products: 40, desc: "Masks, fins, regulators, BCDs & tanks" },
+        { id: 35, name: "🏊‍♀️ Synchronized Swimming", slug: "synchro", icon: "🏊", products: 13, desc: "Swimsuits, nose clips & caps" },
+        { id: 36, name: "🛥️ Jet Ski", slug: "jetski", icon: "🛥️", products: 15, desc: "Life vests, goggles & gloves" },
+        { id: 37, name: "🎣 Fishing", slug: "fishing", icon: "🎣", products: 50, desc: "Rods, reels, lures, lines & tackle boxes" },
+        { id: 38, name: "🪸 Snorkeling", slug: "snorkeling", icon: "🤿", products: 20, desc: "Masks, snorkels, fins & bags" },
+        { id: 39, name: "🏃 Running", slug: "running", icon: "🏃", products: 45, desc: "Shoes, clothes, watches & hydration" },
+        { id: 40, name: "🚴 Cycling", slug: "cycling", icon: "🚴", products: 48, desc: "Bikes, helmets, shoes, clothes & accessories" },
+        { id: 41, name: "🚵 Mountain Biking", slug: "mtb", icon: "🚵", products: 35, desc: "MTB bikes, helmets, pads & gloves" },
+        { id: 42, name: "🧘 Yoga", slug: "yoga", icon: "🧘", products: 38, desc: "Mats, blocks, straps, clothes & props" },
+        { id: 43, name: "💪 Gym & Fitness", slug: "gym", icon: "💪", products: 60, desc: "Weights, benches, machines & apparel" },
+        { id: 44, name: "🤸 Gymnastics", slug: "gymnastics", icon: "🤸", products: 25, desc: "Leotards, grips, mats & chalk" },
+        { id: 45, name: "🧘 Pilates", slug: "pilates", icon: "🧘", products: 22, desc: "Mats, reformers, balls & bands" },
+        { id: 46, name: "🏋️ Weightlifting", slug: "weightlifting", icon: "🏋️", products: 40, desc: "Barbells, plates, racks & belts" },
+        { id: 47, name: "🤸 Calisthenics", slug: "calisthenics", icon: "🤸", products: 18, desc: "Pull-up bars, dip bars & grips" },
+        { id: 48, name: "🏃‍♀️ CrossFit", slug: "crossfit", icon: "💪", products: 35, desc: "Shoes, ropes, kettlebells & gloves" },
+        { id: 49, name: "🥾 Hiking", slug: "hiking", icon: "🥾", products: 32, desc: "Boots, backpacks, poles & tents" },
+        { id: 50, name: "🧗 Rock Climbing", slug: "climbing", icon: "🧗", products: 30, desc: "Shoes, harnesses, ropes, chalk & bags" },
+        { id: 51, name: "🏕️ Camping", slug: "camping", icon: "🏕️", products: 45, desc: "Tents, sleeping bags, stoves & chairs" },
+        { id: 52, name: "⛷️ Skiing", slug: "skiing", icon: "⛷️", products: 38, desc: "Skis, boots, poles, helmets & goggles" },
+        { id: 53, name: "🏂 Snowboarding", slug: "snowboarding", icon: "🏂", products: 32, desc: "Boards, boots, bindings & helmets" },
+        { id: 54, name: "⛸️ Ice Skating", slug: "ice-skating", icon: "⛸️", products: 20, desc: "Skates, helmets & protective gear" },
+        { id: 55, name: "🏒 Ice Hockey", slug: "ice-hockey", icon: "🏒", products: 35, desc: "Sticks, skates, helmets, pads & jerseys" },
+        { id: 56, name: "🥌 Curling", slug: "curling", icon: "🥌", products: 12, desc: "Stones, brooms & shoes" },
+        { id: 57, name: "🛷 Sledding", slug: "sledding", icon: "🛷", products: 10, desc: "Sleds & helmets" },
+        { id: 58, name: "🏏 Cricket", slug: "cricket", icon: "🏏", products: 28, desc: "Bats, balls, pads, gloves & helmets" },
+        { id: 59, name: "🏑 Field Hockey", slug: "field-hockey2", icon: "🏑", products: 18, desc: "Sticks, balls, goals & protective gear" },
+        { id: 60, name: "🏉 Rugby", slug: "rugby", icon: "🏉", products: 22, desc: "Balls, boots, mouthguards & jerseys" },
+        { id: 61, name: "🥎 Softball", slug: "softball", icon: "🥎", products: 19, desc: "Bats, balls, gloves & helmets" },
+        { id: 62, name: "🏐 Beach Volleyball", slug: "beach-volleyball", icon: "🏐", products: 16, desc: "Balls, nets, sunglasses & bags" },
+        { id: 63, name: "🏍️ Motocross", slug: "motocross", icon: "🏍️", products: 28, desc: "Helmets, boots, goggles & protective gear" },
+        { id: 64, name: "🏁 Motorsport", slug: "motorsport", icon: "🏁", products: 30, desc: "Helmets, suits, gloves & shoes" },
+        { id: 65, name: "🪂 Paragliding", slug: "paragliding", icon: "🪂", products: 18, desc: "Wings, harnesses, helmets & reserves" },
+        { id: 66, name: "🪂 Skydiving", slug: "skydiving", icon: "🪂", products: 20, desc: "Jump suits, helmets, altimeters & containers" },
+        { id: 67, name: "🏹 Archery", slug: "archery", icon: "🏹", products: 24, desc: "Bows, arrows, targets & arm guards" },
+        { id: 68, name: "🎯 Darts", slug: "darts", icon: "🎯", products: 20, desc: "Darts, boards, surrounds & cases" },
+        { id: 69, name: "♟️ Chess", slug: "chess", icon: "♟️", products: 15, desc: "Chess sets, boards, clocks & bags" },
+        { id: 70, name: "🎲 Board Games", slug: "board-games", icon: "🎲", products: 40, desc: "Various board games & accessories" },
+        { id: 71, name: "🎮 Esports", slug: "esports", icon: "🎮", products: 35, desc: "Gaming chairs, keyboards, mice & headsets" },
+        { id: 72, name: "♿ Wheelchair Sports", slug: "wheelchair", icon: "♿", products: 25, desc: "Wheelchairs, gloves & accessories" },
+        { id: 73, name: "🪁 Kite Flying", slug: "kite", icon: "🪁", products: 18, desc: "Kites, strings & winders" },
+        { id: 74, name: "🤹 Juggling", slug: "juggling", icon: "🤹", products: 14, desc: "Balls, clubs, rings & diabolos" },
+        { id: 75, name: "🛹 Skateboarding", slug: "skateboarding", icon: "🛹", products: 28, desc: "Decks, trucks, wheels & helmets" },
+        { id: 76, name: "🛼 Roller Skating", slug: "roller-skating", icon: "🛼", products: 22, desc: "Skates, protective gear & bags" },
+        { id: 77, name: "🛴 Scooter", slug: "scooter", icon: "🛴", products: 20, desc: "Scooters, helmets & pads" },
+        { id: 78, name: "🎽 Track & Field", slug: "track-field", icon: "🎽", products: 30, desc: "Spikes, javelins, hurdles & uniforms" }
+    ];
+    
+    function renderSports() {
+        const grid = document.getElementById("sportsGrid");
+        grid.innerHTML = sports.map(sport => `
+            <a href="sport-products.html?sport=${sport.slug}" class="sport-card">
+                <div class="sport-image">
+                    <div class="image-placeholder sport-bg">
+                        <div class="placeholder-content">
+                            <div class="sport-icon">${sport.icon}</div>
+                            <p>${sport.name}<br><small>Click to view products</small></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sport-info">
+                    <h3>${sport.name}</h3>
+                    <p>${sport.desc.substring(0, 45)}${sport.desc.length > 45 ? '...' : ''}</p>
+                    <span class="product-count"><i class="fas fa-box"></i> ${sport.products} Products</span>
+                </div>
+            </a>
+        `).join('');
+    }
+    
+    renderSports();
+</script>
+</body>
+</html>
