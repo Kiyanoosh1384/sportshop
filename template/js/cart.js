@@ -1,7 +1,3 @@
-// ============================================
-// CART.JS - SHOPPING CART FUNCTIONALITY
-// ============================================
-
 class ShoppingCart {
     constructor() {
         this.cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -109,7 +105,6 @@ class ShoppingCart {
             cartContainer.innerHTML = html;
             if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
             
-            // بایند ایونت‌ها برای آیتم‌های جدید
             document.querySelectorAll('.cart-quantity').forEach(input => {
                 input.addEventListener('change', (e) => {
                     this.updateQuantity(e.target.dataset.id, parseInt(e.target.value));
@@ -131,6 +126,5 @@ class ShoppingCart {
     }
 }
 
-// مقداردهی اولیه سبد خرید
 const cart = new ShoppingCart();
-window.cart = cart; // برای دسترسی در کنسول
+window.cart = cart; 

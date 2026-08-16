@@ -1,10 +1,5 @@
-// ============================================
-// MAIN.JS - CORE JAVASCRIPT FUNCTIONALITY
-// ============================================
-
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ===== سایدبار =====
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const openSidebar = document.getElementById('openSidebar');
@@ -27,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.addEventListener('click', closeSidebarFunc);
     }
     
-    // ===== لیست کامل ورزش‌ها برای جستجو =====
     const allSportsList = [
         "Football", "Basketball", "Tennis", "Volleyball", "Table Tennis", "Badminton", "Baseball", "American Football",
         "Field Hockey", "Lacrosse", "Handball", "Billiards", "Bowling", "Golf", "Disc Golf", "Padel", "Squash",
@@ -41,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         "Skateboarding", "Roller Skating", "Scooter", "Track & Field"
     ];
     
-    // ===== سرچ مودال با جستجوی قوی =====
     const searchBtn = document.getElementById('searchBtn');
     const searchModal = document.getElementById('searchModal');
     const closeSearch = document.getElementById('closeSearch');
@@ -70,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target === searchModal) closeSearchFunc();
         });
         
-        // جستجوی زنده
         if (searchInput && searchResults) {
             searchInput.addEventListener('input', function(e) {
                 const query = e.target.value.toLowerCase().trim();
@@ -80,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 
-                // فیلتر کردن ورزش‌ها بر اساس query
                 const filtered = allSportsList.filter(sport => 
                     sport.toLowerCase().includes(query)
                 );
@@ -96,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 
-                // نمایش نتایج با قابلیت اسکرول
                 searchResults.innerHTML = `
                     <div style="padding: 10px 0; border-bottom: 1px solid rgba(100,255,218,0.1); position: sticky; top: 0; background: var(--primary-light); z-index: 5;">
                         <small style="color: var(--secondary);">Found ${filtered.length} result(s)</small>
@@ -117,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
                 
-                // اضافه کردن استایل هاور به نتایج
                 document.querySelectorAll('.search-result-item').forEach(item => {
                     item.addEventListener('mouseenter', () => {
                         item.style.backgroundColor = 'rgba(100, 255, 218, 0.1)';
@@ -131,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ===== اسلایدر هیرو =====
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.querySelector('.slider-prev');
     const nextBtn = document.querySelector('.slider-next');
@@ -199,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
         startInterval();
     }
     
-    // ===== اسکرول انیمیشن =====
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -221,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // ===== هدر شفاف در اسکرول =====
     const header = document.querySelector('.main-header');
     if (header) {
         window.addEventListener('scroll', () => {
@@ -234,7 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ===== نیوزلتر فرم =====
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
@@ -247,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ===== بروزرسانی تعداد سبد خرید از localStorage =====
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('sportpro_cart')) || [];
         const total = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -265,7 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => notification.remove(), 3000);
     }
     
-    // ===== محصولات: اضافه به سبد خرید =====
     const addToCartBtns = document.querySelectorAll('.add-to-cart');
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -290,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ===== محصولات: علاقه‌مندی =====
     const wishlistBtns = document.querySelectorAll('.add-wishlist');
     wishlistBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -307,23 +289,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ===== سیستم علاقه‌مندی (Wishlist) =====
 const CART_KEY = 'sportpro_cart';
 const WISHLIST_KEY = 'sportpro_wishlist';
 
-// بارگذاری علاقه‌مندی‌ها
 function loadWishlist() {
     const saved = localStorage.getItem(WISHLIST_KEY);
     return saved ? JSON.parse(saved) : [];
 }
 
-// ذخیره علاقه‌مندی‌ها
 function saveWishlist(wishlist) {
     localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
     updateWishlistCount();
 }
 
-// بروزرسانی تعداد علاقه‌مندی‌ها
 function updateWishlistCount() {
     const wishlist = loadWishlist();
     const total = wishlist.length;
@@ -332,7 +310,6 @@ function updateWishlistCount() {
     });
 }
 
-// اضافه/حذف به علاقه‌مندی‌ها
 function toggleWishlist(productId, productName, productPrice) {
     let wishlist = loadWishlist();
     const existing = wishlist.find(item => item.id == productId);
@@ -354,13 +331,11 @@ function toggleWishlist(productId, productName, productPrice) {
     return wishlist;
 }
 
-// بررسی اینکه محصول در علاقه‌مندی‌ها هست یا نه
 function isInWishlist(productId) {
     const wishlist = loadWishlist();
     return wishlist.some(item => item.id == productId);
 }
 
-// دکمه‌های علاقه‌مندی در صفحات
 document.querySelectorAll('.add-wishlist').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -371,17 +346,14 @@ document.querySelectorAll('.add-wishlist').forEach(btn => {
         
         toggleWishlist(productId, productName, productPrice);
         
-        // تغییر شکل قلب
         const heartIcon = btn.querySelector('i');
         heartIcon.classList.toggle('fas');
         heartIcon.classList.toggle('far');
     });
 });
 
-// بروزرسانی اولیه
 updateWishlistCount();
     
-    // ===== محصولات: نمایش سریع =====
     const quickViewBtns = document.querySelectorAll('.quick-view');
     quickViewBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {

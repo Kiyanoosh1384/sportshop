@@ -1,38 +1,26 @@
-/* ============================================ */
-/* VARIABLES.CSS - ALL DESIGN TOKENS            */
-/* ============================================ */
-/* برنامه‌نویس عزیز: برای تغییر ظاهر کلی سایت،  */
-/* فقط مقادیر این فایل رو تغییر بده             */
-/* ============================================ */
-
 :root {
-    /* ===== رنگ‌های اصلی ===== */
-    --primary-dark: #0A192F;      /* سرمه‌ای تیره - اصلی */
-    --primary-light: #112240;     /* سرمه‌ای روشن‌تر */
-    --secondary: #64FFDA;         /* سبز آبی - هایلایت */
-    --accent: #FF6B6B;            /* قرمز ملایم - اکشن‌ها */
+    --primary-dark: #0A192F;      
+    --primary-light: #112240;    
+    --secondary: #64FFDA;         
+    --accent: #FF6B6B;          
     
-    /* ===== رنگ‌های پس‌زمینه ===== */
-    --bg-dark: #0A0A0A;           /* مشکی برای placeholder */
-    --bg-medium: #1a1a2e;         /* سرمه‌ای تیره */
-    --bg-light: #F5F5F5;          /* سفید شکسته */
-    --bg-product: #16213e;        /* برای کارت محصولات */
-    --bg-blog: #0f3460;           /* برای وبلاگ */
-    --bg-banner: #1a1a2e;         /* برای بنر */
+    --bg-dark: #0A0A0A;         
+    --bg-medium: #1a1a2e;  
+    --bg-light: #F5F5F5;        
+    --bg-product: #16213e;   
+    --bg-blog: #0f3460;           
+    --bg-banner: #1a1a2e;        
     
-    /* ===== رنگ‌های متن ===== */
     --text-white: #FFFFFF;
     --text-light: #E2E8F0;
     --text-gray: #8892B0;
     --text-dark: #1A202C;
     
-    /* ===== رنگ‌های وضعیت ===== */
     --success: #10B981;
     --error: #EF4444;
     --warning: #F59E0B;
     --info: #3B82F6;
     
-    /* ===== فونت‌ها ===== */
     --font-primary: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-size-base: 16px;
     --font-size-sm: 0.875rem;
@@ -42,7 +30,6 @@
     --font-size-3xl: 2rem;
     --font-size-4xl: 2.5rem;
     
-    /* ===== فاصله‌ها (Spacing) ===== */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
@@ -52,31 +39,26 @@
     --spacing-3xl: 4rem;
     --spacing-4xl: 6rem;
     
-    /* ===== انیمیشن ===== */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
     
-    /* ===== سایه‌ها ===== */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     --shadow-glow: 0 0 20px rgba(100, 255, 218, 0.3);
     
-    /* ===== border-radius ===== */
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --radius-lg: 1rem;
     --radius-xl: 1.5rem;
     --radius-full: 9999px;
     
-    /* ===== عرض کانتینر ===== */
     --container-width: 1200px;
     --container-padding: 1rem;
 }
 
-/* ===== فونت وزیر ===== */
 @font-face {
     font-family: 'Vazir';
     src: url('../fonts/Vazir/Vazir-Regular.woff2') format('woff2');
@@ -101,7 +83,6 @@
     font-display: swap;
 }
 
-/* ===== ریست کلی و تنظیمات پایه ===== */
 * {
     margin: 0;
     padding: 0;
@@ -127,7 +108,6 @@ body {
     padding: 0 var(--container-padding);
 }
 
-/* ===== تصاویر placeholder ===== */
 .image-placeholder {
     width: 100%;
     height: 100%;
@@ -136,7 +116,7 @@ body {
     justify-content: center;
     text-align: center;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-    color: #FFFFFF;  /* متن سفید */
+    color: #FFFFFF; 
     position: relative;
     overflow: hidden;
     border: 2px dashed rgba(100, 255, 218, 0.3);
@@ -208,7 +188,6 @@ body {
     opacity: 0.8;
 }
 
-/* ===== دکمه‌ها ===== */
 .btn-primary {
     display: inline-flex;
     align-items: center;
