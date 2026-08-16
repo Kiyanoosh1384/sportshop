@@ -1,13 +1,6 @@
-/* ============================================ */
-/* MAIN.CSS - CORE STYLES                       */
-/* ============================================ */
-/* برنامه‌نویس: این فایل شامل استایل‌های اصلی   */
-/* ساختارهای سایت مثل هدر، فوتر، بخش‌ها و ...   */
-/* ============================================ */
-
 @import url('variables.css');
 
-/* ===== HEADER ===== */
+
 .main-header {
     position: fixed;
     top: 0;
@@ -41,7 +34,7 @@
     color: var(--text-white);
 }
 
-/* دسکتاپ ناوبری */
+
 .desktop-nav ul {
     display: flex;
     gap: var(--spacing-xl);
@@ -60,7 +53,7 @@
     color: var(--secondary);
 }
 
-/* هدر آیکون‌ها */
+
 .header-icons {
     display: flex;
     gap: var(--spacing-md);
@@ -93,7 +86,7 @@
     border-radius: var(--radius-full);
 }
 
-/* ===== Wishlist Count - مثل سبد خرید ===== */
+
 .wishlist-count {
     position: absolute;
     top: -8px;
@@ -115,7 +108,7 @@
     display: none;
 }
 
-/* ===== SIDEBAR ===== */
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -198,7 +191,7 @@
     margin-bottom: var(--spacing-md);
 }
 
-/* ===== SEARCH MODAL ===== */
+
 .search-modal {
     position: fixed;
     top: 0;
@@ -256,7 +249,7 @@
     outline: none;
 }
 
-/* ===== HERO SLIDER ===== */
+
 .hero {
     position: relative;
     height: 100vh;
@@ -381,7 +374,7 @@
     box-shadow: 0 8px 25px rgba(100, 255, 218, 0.4);
 }
 
-/* اسلایدر کنترل */
+
 .slider-prev,
 .slider-next {
     position: absolute;
@@ -435,7 +428,7 @@
     width: 30px;
 }
 
-/* ===== SECTIONS GENERAL ===== */
+
 section {
     padding: var(--spacing-4xl) 0;
 }
@@ -454,7 +447,7 @@ section {
     color: var(--text-gray);
 }
 
-/* ===== FEATURES ===== */
+
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -490,7 +483,7 @@ section {
     color: var(--secondary);
 }
 
-/* ===== CATEGORIES ===== */
+
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -537,7 +530,7 @@ section {
     transform: scale(1.05);
 }
 
-/* ===== PRODUCTS ===== */
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -677,7 +670,7 @@ section {
     margin-top: var(--spacing-2xl);
 }
 
-/* ===== BANNER ===== */
+
 
 .banner-wrapper {
     position: relative;
@@ -734,7 +727,7 @@ section {
     box-shadow: 0 8px 25px rgba(100, 255, 218, 0.4);
 }
 
-/* ===== BLOG ===== */
+
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -812,7 +805,7 @@ section {
     gap: 12px;
 }
 
-/* ===== NEWSLETTER ===== */
+
 .newsletter {
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
 }
@@ -859,7 +852,7 @@ section {
     background: var(--accent);
 }
 
-/* ===== FOOTER ===== */
+
 .main-footer {
     background: var(--primary-light);
     padding-top: var(--spacing-3xl);
@@ -899,12 +892,11 @@ section {
     color: var(--secondary);
 }
 
-/* ===== SOCIAL LINKS - اصلاح شده ===== */
 .social-links {
     display: flex;
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
-    justify-content: flex-start;  /* چپ‌چین - برای RTL میشه راست */
+    justify-content: flex-start; 
 }
 
 .social-links a {
@@ -917,7 +909,7 @@ section {
     border-radius: var(--radius-full);
     transition: var(--transition-normal);
     text-decoration: none;
-    font-size: 1.3rem;  /* بزرگتر شدن آیکون‌ها */
+    font-size: 1.3rem;  
 }
 
 .social-links a i {
@@ -925,14 +917,14 @@ section {
     transition: var(--transition-normal);
 }
 
-/* فقط رنگ عوض بشه - بدون کوچک شدن */
+
 .social-links a:hover {
     background: transparent;
-    transform: none;  /* کوچک نمیشه */
+    transform: none; 
 }
 
 .social-links a:hover i {
-    color: var(--secondary);  /* فقط رنگ عوض میشه */
+    color: var(--secondary);  
 }
 
 .contact-info li {
@@ -958,7 +950,7 @@ section {
     color: var(--text-gray);
 }
 
-/* ===== ANIMATIONS ===== */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -979,7 +971,7 @@ section {
     }
 }
 
-/* ===== SHOP PAGE STYLES ===== */
+
 .page-header {
     text-align: center;
     margin-bottom: var(--spacing-3xl);
